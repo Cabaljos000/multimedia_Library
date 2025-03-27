@@ -1,0 +1,15 @@
+<% content_for :title, "Books" %>
+
+<div class="flex items-center justify-between mbe-4">
+  <h1 class="font-bold text-4xl">Books</h1>
+  <%= link_to "New book", new_book_path, class: "btn btn--primary" %>
+</div>
+
+<div id="books" class="flex flex-col" style="gap: 2rem;">
+  <% @books.each do |book| %>
+    <div class="flex flex-col items-start gap">
+      <%= render book %>
+      <%= link_to "Show this book", book, class: "btn" %>
+    </div>
+  <% end %>
+</div>
