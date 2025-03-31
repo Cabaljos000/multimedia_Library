@@ -7,11 +7,24 @@ Given("I am logged in") do
   end
   
   Given("a movie titled {string} exists") do |title|
-    Movie.create(title: title, year_published: 2010, description: "A great movie")
+    Movie.create(title: title, year: 2010, description: "A great movie")
   end
   
   When("I visit the movies index page") do
     visit movies_path
+  end
+
+  When("I fill in {string} with {string}") do |field, value|
+    fill_in field, with: value
+  end
+
+  Given("I am on the {string} page") do |page|
+    case page
+    when "New Movie"
+      visit new_movie_path
+    when "New Music"
+      visit new_music_path
+    end
   end
 
   

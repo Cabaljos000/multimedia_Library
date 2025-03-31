@@ -26,7 +26,8 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: "Movie was successfully created." }
+        flash[:notice] = "Movie was successfully created"
+        format.html { redirect_to @movie }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,6 +67,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.expect(movie: [ :title, :director, :release_date ])
+      params.expect(movie: [ :title, :director, :year, :description ])
     end
 end
