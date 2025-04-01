@@ -10,9 +10,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -28,13 +25,33 @@
     <header id="header">
       <div class="container">
         <h1 class="font-bold text-2xl">Multimedia Library</h1>
+        <% if user_signed_in? %>
+          <p>Welcome, <%= current_user.email %>! <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+        <% else %>
+          <p><%= link_to "Login", new_user_session_path %> | <%= link_to "Sign Up", new_user_registration_path %></p>
+        <% end %>
       </div>
     </header>
 
     <main id="main">
-      <% if notice.present? %>
-        <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
+      <% if flash[:notice] %>
+        <div class="flash-notice">
+          <%= flash[:notice] %>
+        </div>
       <% end %>
+
+      <% if flash[:alert] %>
+        <div class="flash-alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <% if flash[:error] %>
+        <div class="flash-error">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+
       <div class="container">
         <%= yield %>
       </div>

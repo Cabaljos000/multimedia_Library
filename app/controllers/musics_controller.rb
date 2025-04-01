@@ -26,7 +26,8 @@ class MusicsController < ApplicationController
 
     respond_to do |format|
       if @music.save
-        format.html { redirect_to @music, notice: "Music was successfully created." }
+        flash[:notice] = "Music was successfully created"
+        format.html { redirect_to @music }
         format.json { render :show, status: :created, location: @music }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,6 +67,6 @@ class MusicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def music_params
-      params.expect(music: [ :title, :artist, :album,:year, :description ])
+      params.expect(music: [ :title, :artist, :album, :year, :description ])
     end
 end
