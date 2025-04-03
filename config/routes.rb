@@ -15,6 +15,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   
-  root "movies#index"
+  root "home#index"
+
+  class ApplicationController < ActionController::Base
+    before_action :authenticate_user!
+  
+    def after_sign_in_path_for(resource)
+      root_path
+    end
+  
+    def after_sign_up_path_for(resource)
+      stored_location_for(resource) || root_path
+    end
+  end
   
 end

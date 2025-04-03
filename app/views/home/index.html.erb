@@ -1,4 +1,47 @@
-<h1>Welcome to the Media Library</h1>
-<%= link_to "Movies", movies_path %><br>
-<%= link_to "Books", books_path %><br>
-<%= link_to "Music", musics_path %><br>
+<h1>Welcome to the Project</h1>
+
+<div class="flex items-center justify-between mbe-4">
+  <h2 class="font-bold text-2xl">Movies</h2>
+  <%= link_to "New Movie", new_movie_path, class: "btn btn--primary" %>
+</div>
+
+<div id="movies" class="flex flex-col" style="gap: 2rem;">
+  <% @movies.each do |movie| %>
+    <div class="flex flex-col items-start gap">
+      <%= render movie %> <!-- Adjust this line to render the movie -->
+      <%= link_to "Show this movie", movie, class: "btn" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="flex items-center justify-between mbe-4">
+  <h2 class="font-bold text-2xl">Books</h2>
+  <%= link_to "New Book", new_book_path, class: "btn btn--primary" %>
+</div>
+
+<div id="books" class="flex flex-col" style="gap: 2rem;">
+  <% @books.each do |book| %>
+    <div class="flex flex-col items-start gap">
+      <%= render book %> <!-- Adjust this line to render the book -->
+      <%= link_to "Show this book", book, class: "btn" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="flex items-center justify-between mbe-4">
+  <h2 class="font-bold text-2xl">Music</h2>
+  <%= link_to "New Music", new_music_path, class: "btn btn--primary" %>
+</div>
+
+<div id="musics" class="flex flex-col" style="gap: 2rem;">
+  <% if @musics.present? %>
+    <% @musics.each do |music| %>
+      <div class="flex flex-col items-start gap">
+        <%= render music %>
+        <%= link_to "Show this music", music, class: "btn" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No music found.</p>
+  <% end %>
+</div>

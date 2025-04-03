@@ -1,4 +1,4 @@
-<%= form_with(model: book, html: { contents: true }) do |form| %>
+<%= form_with(model: book) do |form| %>
   <% if book.errors.any? %>
     <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
       <h2 class="font-medium leading-none"><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
@@ -17,16 +17,22 @@
   </div>
 
   <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :description, class: "text-sm font-medium leading-none" %>
+    <%= form.text_area :description, class: "input" %>
+  </div>
+
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :year_published, "Year Published", class: "text-sm font-medium leading-none" %>
+    <%= form.number_field :year_published, class: "input" %>
+  </div>
+
+  <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :author, class: "text-sm font-medium leading-none" %>
     <%= form.text_field :author, class: "input" %>
   </div>
 
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :year, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :year, class: "input" %>
-  </div>
-
   <div class="inline-flex items-center mbs-2 mie-1">
-    <%= form.submit class: "btn btn--primary" %>
+    <%= form.submit "Save Book", class: "btn btn--primary" %>
   </div>
 <% end %>
+

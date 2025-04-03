@@ -8,7 +8,7 @@ Feature: User Authentication
     When I fill in "Email" with "test@example.com"
     And I fill in "Password" with "password123"
     And I fill in "Password confirmation" with "password123"
-    And I press "Sign up"
+    And I press "Confirm"
     Then I should see "Welcome! You have signed up successfully."
 
   Scenario: User logs in successfully
