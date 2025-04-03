@@ -2,7 +2,28 @@
 
 <h1 class="font-bold text-4xl mbe-4">New book</h1>
 
-<%= render "form", book: @book %>
+<%= form_with(model: @book, local: true) do |form| %>
+  
+  <div class="mb-4">
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, class: "form-control", id: "book_title", name: "book[title]" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :year, "Year" %>
+    <%= form.text_field :year, class: "form-control", id: "book_year", name: "book[year]" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, class: "form-control", id: "book_description" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.submit "Create Book", class: "btn btn-primary", id: "create_book_button" %>
+  </div>
+
+<% end %>
 
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
   <%= link_to "Back to books", books_path, class: "btn" %>
