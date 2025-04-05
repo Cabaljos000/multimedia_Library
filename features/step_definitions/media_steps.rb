@@ -24,6 +24,8 @@ Given("I am logged in") do
       visit new_movie_path
     when "New Music"
       visit new_music_path
+    when "New Book"
+      visit new_book_path
     end
   end
 

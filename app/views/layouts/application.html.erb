@@ -21,38 +21,47 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="header-layout">
-    <header id="header">
-      <div class="container">
-        <h1 class="font-bold text-2xl">Multimedia Library</h1>
+  <body class="bg-gray-100 text-gray-900 font-sans">
+    <header class="bg-blue-600 text-white py-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <h1 class="text-3xl font-bold">Multimedia Library</h1>
+        <nav class="space-x-4">
+          <%= link_to "Home", root_path, class: "px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md transition" %>
+          <%= link_to "Movies", movies_path, class: "px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md transition" %>
+          <%= link_to "Books", books_path, class: "px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md transition" %>
+          <%= link_to "Music", musics_path, class: "px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md transition" %>
+        </nav>
+        
         <% if user_signed_in? %>
-          <p>Welcome, <%= current_user.email %>! <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+          <div>
+            <p class="text-sm">Welcome, <%= current_user.email %>!</p>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-white underline text-sm" %>
+          </div>
         <% else %>
-          <p><%= link_to "Login", new_user_session_path %> | <%= link_to "Sign Up", new_user_registration_path %></p>
+          <div class="text-sm">
+            <%= link_to "Login", new_user_session_path, class: "underline" %> |
+            <%= link_to "Sign Up", new_user_registration_path, class: "underline" %>
+          </div>
         <% end %>
       </div>
     </header>
 
-    <main id="main">
+    <main class="container mx-auto py-6 px-4">
       <% if flash[:notice] %>
-        <div class="flash-notice">
+        <div class="mb-4 p-4 bg-green-200 text-green-800 border-l-4 border-green-600 rounded-md">
           <%= flash[:notice] %>
         </div>
-      <% end %>
-
-      <% if flash[:alert] %>
-        <div class="flash-alert">
+      <% elsif flash[:alert] %>
+        <div class="mb-4 p-4 bg-red-200 text-red-800 border-l-4 border-red-600 rounded-md">
           <%= flash[:alert] %>
         </div>
-      <% end %>
-
-      <% if flash[:error] %>
-        <div class="flash-error">
+      <% elsif flash[:error] %>
+        <div class="mb-4 p-4 bg-yellow-200 text-yellow-800 border-l-4 border-yellow-600 rounded-md">
           <%= flash[:error] %>
         </div>
       <% end %>
-
-      <div class="container">
+      
+      <div class="bg-white p-6 rounded-lg shadow-md">
         <%= yield %>
       </div>
     </main>

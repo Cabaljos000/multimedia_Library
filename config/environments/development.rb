@@ -5,6 +5,11 @@ Rails.application.configure do
   config.annotations.register_directories('features')
   config.annotations.register_extensions('feature') { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
 
+  config.hosts << "ideal-space-barnacle-g9p9jqx9v66c94qp-3000.app.github.dev"
+  config.hosts << "localhost"
+
+  config.action_controller.forgery_protection_origin_check = false
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
