@@ -18,6 +18,12 @@
     <%= form.text_area :description, class: "form-control" %>
   </div>
 
+  <!-- Add the Rating field here -->
+  <div class="mb-4">
+    <%= form.label :rating, "Rating" %>
+    <%= form.number_field :rating, min: 1, max: 5, class: "form-control" %>
+  </div>
+
   <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
     <%= link_to "Back to movies", movies_path, class: "btn" %>
   </div>

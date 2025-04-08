@@ -29,4 +29,7 @@ Given("I am logged in") do
     end
   end
 
+  Then("I should see a movie creation success message") do |error_message|
+    expect(page).to have_content(error_message)
+  end
   
