@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
   # POST /movies or /movies.json
   def create
     @movie = Movie.new(movie_params)
+    @movie.user = current_user
 
     respond_to do |format|
       if @movie.save
@@ -60,13 +61,14 @@ class MoviesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params.expect(:id))
+      @movie = Movie.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # ✅ Updated strong params to include `poster` and other fields
     def movie_params
-      params.expect(movie: [ :title, :director, :year, :description ])
+      params.require(:movie).permit(:title, :year, :description, :rating, :release_date, :director, :poster)
     end
 end

@@ -8,8 +8,15 @@
 <div id="movies" class="flex flex-col" style="gap: 2rem;">
   <% @movies.each do |movie| %>
     <div class="flex flex-col items-start gap">
-      <%= render movie %>
-      <%= link_to "Show this movie", movie, class: "btn" %>
+    <%= link_to movie_path(movie) do %>
+      <% if movie.poster.attached? %>
+        <%= image_tag movie.poster.variant(resize_to_limit: [200, 300]), alt: movie.title, class: "rounded shadow-lg hover:scale-105 transition-transform duration-200" %>
+      <% else %>
+        <div class="w-48 h-64 bg-gray-200 flex items-center justify-center rounded shadow-inner">
+          <span class="text-sm text-gray-500">No Image</span>
+        </div>
+      <% end %>
+    <% end %>
     </div>
   <% end %>
 </div>
