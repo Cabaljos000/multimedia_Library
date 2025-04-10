@@ -1,6 +1,6 @@
 .input {
   appearance: none;
-  background-color: var(--input-background, transparent);
+  background-color: #777777;
   block-size: var(--input-block-size, auto);
   border: 1px solid var(--input-border-color, var(--color-border));
   border-radius: var(--input-radius, var(--rounded-md));
@@ -8,6 +8,7 @@
   font-size: var(--input-font-size, var(--text-sm));
   inline-size: var(--input-inline-size, var(--size-full));
   padding: var(--input-padding, .375rem .75rem);
+
 
   &:is(textarea[rows=auto]) {
     field-sizing: content;
@@ -77,6 +78,6 @@
 
   .field_with_errors & {
     border-color: var(--color-negative);
-    display: contents;
+    
   }
 }
