@@ -9,9 +9,25 @@ Given("I am logged in") do
   Given("a movie titled {string} exists") do |title|
     Movie.create(title: title, year: 2010, description: "A great movie")
   end
+
+  Given("a book titled {string} exists") do |title|
+    Movie.create(title: title, year: 2010, description: "A great book")
+  end
+
+  Given("a music titled {string} exists") do |title|
+    Movie.create(title: title, year: 2010, description: "A great song")
+  end
   
   When("I visit the movies index page") do
     visit movies_path
+  end
+
+  When("I visit the books index page") do
+    visit books_path
+  end
+
+  When("I visit the music index page") do
+    visit musics_path
   end
 
   When("I fill in {string} with {string}") do |field, value|
@@ -26,6 +42,20 @@ Given("I am logged in") do
       visit new_music_path
     when "New Book"
       visit new_book_path
+    end
+  end
+
+  When("I visit the {string} show page") do |media|
+    case media
+    when "movie"
+      movie = Movie.find_by(title: "Movie")
+      visit movie_path(movie) if movie
+    when "book"
+      book = Book.find_by(title: "Book")
+      visit book_path(book) if book
+    when "music"
+      music = Music.find_by(title: "Music")
+      visit music_path(music) if music
     end
   end
 
