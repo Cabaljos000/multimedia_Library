@@ -70,6 +70,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_10_162638) do
     t.datetime "updated_at", null: false
     t.string "genre"
     t.text "description"
+    t.string "album"
   end
 
   create_table "users", force: :cascade do |t|

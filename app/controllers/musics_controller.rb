@@ -1,5 +1,6 @@
 class MusicsController < ApplicationController
-  before_action :set_music, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new, :create]
+
 
   # GET /musics or /musics.json
   def index
@@ -8,7 +9,7 @@ class MusicsController < ApplicationController
 
   # GET /musics/1 or /musics/1.json
   def show
-    @movie = Movie.find(params[:id])
+    @music = Music.find(params[:id])
   end
 
   # GET /musics/new
@@ -18,6 +19,8 @@ class MusicsController < ApplicationController
 
   # GET /musics/1/edit
   def edit
+    @music = Music.find(params[:id])
+    render :edit
   end
 
   # POST /musics or /musics.json
@@ -39,6 +42,7 @@ class MusicsController < ApplicationController
   # PATCH/PUT /musics/1 or /musics/1.json
   def update
     respond_to do |format|
+      @music = Music.find(params[:id])
       if @music.update(music_params)
         format.html { redirect_to @music, notice: "Music was successfully updated." }
         format.json { render :show, status: :ok, location: @music }
@@ -51,6 +55,7 @@ class MusicsController < ApplicationController
 
   # DELETE /musics/1 or /musics/1.json
   def destroy
+    @music = Music.find(params[:id])
     @music.destroy!
 
     respond_to do |format|
@@ -67,6 +72,6 @@ class MusicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def music_params
-      params.expect(music: [ :title, :artist, :album, :year, :description ])
-    end
+      params.require(:music).permit(:title, :artist, :album, :genre, :year, :description)
+    end    
 end
