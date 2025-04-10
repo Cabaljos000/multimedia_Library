@@ -11,29 +11,46 @@
     </div>
   <% end %>
 
+  <!-- Title -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :title, class: "text-sm font-medium leading-none" %>
     <%= form.text_field :title, class: "input" %>
   </div>
 
+  <!-- Director -->
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :director, class: "text-sm font-medium leading-none" %>
+    <%= form.text_field :director, class: "input" %>
+  </div>
+
+  <!-- Year -->
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :year, class: "text-sm font-medium leading-none" %>
+    <%= form.number_field :year, class: "input" %>
+  </div>
+
+  <!-- Rating -->
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :rating, class: "text-sm font-medium leading-none" %>
+    <%= form.number_field :rating, in: 0..5, class: "input" %>
+  </div>
+
+  <!-- Franchise -->
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :franchise, class: "text-sm font-medium leading-none" %>
+    <%= form.text_field :franchise, class: "input" %>
+  </div>
+
+  <!-- Description -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :description, class: "text-sm font-medium leading-none" %>
     <%= form.text_area :description, class: "input" %>
   </div>
 
+  <!-- Cover Picture Upload -->
   <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :release_date, class: "text-sm font-medium leading-none" %>
-    <%= form.date_select :release_date, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :rating, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :rating, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :director, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :director, class: "input" %>
+    <%= form.label :image, "Upload an Image", class: "text-sm font-medium leading-none" %>
+    <%= form.file_field :image, class: "input" %>
   </div>
 
   <!-- ✅ New Poster Upload Field -->

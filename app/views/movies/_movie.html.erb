@@ -1,19 +1,48 @@
-<div id="<%= dom_id movie %>" class="flex flex-col gap">
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Title:</h4>
-    <p class="leading-none"><%= movie.title %></p>
+<div id="<%= dom_id(movie) %>" class="flex flex-col gap p-4 rounded-xl shadow bg-white">
+
+  <div class="flex justify-center mb-4">
+    <% if movie.cover_picture.present? %>
+      <%= image_tag movie.cover_picture, alt: "#{movie.title} cover", class: "movie-image rounded-lg shadow-md" %>
+    <% elsif movie.image.attached? %>
+      <%= image_tag movie.image, class: "movie-image rounded-lg shadow-md" %>
+    <% end %>
   </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Director:</h4>
-    <p class="leading-none"><%= movie.director %></p>
+
+
+  <div class="flex flex-col gap-2">
+    <div>
+      <h4 class="font-semibold">Title:</h4>
+      <p><%= movie.title %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Director:</h4>
+      <p><%= movie.director %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Year:</h4>
+      <p><%= movie.year %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Rating:</h4>
+      <p><%= movie.rating %>/5</p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Franchise:</h4>
+      <p><%= movie.franchise %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Description:</h4>
+      <p><%= movie.description %></p>
+    </div>
   </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Year:</h4>
-    <p class="leading-none"><%= movie.year %></p>
-  </div>
-  <div class="movie-item">
-    h3><%= movie.title %></h3>
-    <p><%= movie.description %></p>
-    <p><%= movie.year %></p>
+
+  <div class="flex gap-2 mt-4">
+    <%= link_to "Edit", edit_movie_path(movie), class: "btn btn--primary" %>
+    <%= link_to "Delete", movie_path(movie), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
   </div>
 </div>

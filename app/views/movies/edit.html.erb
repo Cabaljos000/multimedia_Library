@@ -7,4 +7,37 @@
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
   <%= link_to "Show this movie", @movie, class: "btn" %>
   <%= link_to "Back to movies", movies_path, class: "btn" %>
+  <%= link_to "Edit", edit_movie_path(@movie), class: "btn" %>
 </div>
+
+<%= form_with(model: @movie, local: true) do |form| %>
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+      <ul>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_date %>
+    <%= form.date_select :release_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Confirm" %>
+  </div>
+<% end %>

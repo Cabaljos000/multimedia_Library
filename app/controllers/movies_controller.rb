@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @movie.save
         flash[:notice] = "Movie was successfully created"
-        format.html { redirect_to @movie }
+        format.html { redirect_to movies_path }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MoviesController < ApplicationController
 
   # DELETE /movies/1 or /movies/1.json
   def destroy
-    @movie.destroy!
+    @movie.destroy
 
     respond_to do |format|
       format.html { redirect_to movies_path, status: :see_other, notice: "Movie was successfully destroyed." }
@@ -70,5 +70,6 @@ class MoviesController < ApplicationController
     # ✅ Updated strong params to include `poster` and other fields
     def movie_params
       params.require(:movie).permit(:title, :year, :description, :rating, :release_date, :director, :poster)
+
     end
 end
