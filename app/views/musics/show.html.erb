@@ -1,11 +1,5 @@
 <%= render @music %>
 
-<h1><%= @music.title %></h1>
-<p><%= @music.description %></p>
-<p>Release Date: <%= @music.release_date %></p>
-<p>Artist: <%= @music.artist %></p>
-<p>Genre: <%= @music.genre %></p>
-
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
   <%= link_to "Edit this music", edit_music_path(@music), class: "btn" %>
   <%= link_to "Back to musics", musics_path, class: "btn" %>
