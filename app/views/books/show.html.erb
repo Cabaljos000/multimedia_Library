@@ -11,3 +11,6 @@
   <%= link_to "Back to books", books_path, class: "btn" %>
   <%= button_to "Destroy this book", @book, method: :delete, class: "btn" %>
 </div>
+
+<%= link_to "Edit", edit_book_path(@book), class: "btn btn--primary" %>
+<%= button_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>

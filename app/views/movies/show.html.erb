@@ -2,7 +2,7 @@
 
 <h1><%= @movie.title %></h1>
 <p><%= @movie.description %></p>
-<p>Release Date: <%= @movie.release_date %></p>
+<p>Release Date: <%= @movie.year %></p>
 <p>Rating: <%= @movie.rating %></p>
 <p>Director: <%= @movie.director %></p>
 
@@ -12,4 +12,6 @@
   <%= button_to "Destroy this movie", @movie, method: :delete, class: "btn" %>
 </div>
 
+<%= link_to "Edit", edit_movie_path(@movie), class: "btn btn--primary" %>
+<%= button_to "Delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
 

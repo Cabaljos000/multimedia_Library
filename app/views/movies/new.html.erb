@@ -3,32 +3,56 @@
 <h1 class="font-bold text-4xl mbe-4">New movie</h1>
 
 <%= form_with(model: @movie, local: true) do |form| %>
+
   <div class="mb-4">
     <%= form.label :title, "Title" %>
     <%= form.text_field :title, class: "form-control" %>
   </div>
+
 
   <div class="mb-4">
     <%= form.label :year, "Year Published" %>
     <%= form.text_field :year, class: "form-control" %>
   </div>
 
+
   <div class="mb-4">
     <%= form.label :description, "Description" %>
     <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <!-- Add the Rating field here -->
+
+  <div class="mb-4">
+    <%= form.label :director, "Director" %>
+    <%= form.text_field :director, class: "form-control" %>
+  </div>
+
+
   <div class="mb-4">
     <%= form.label :rating, "Rating" %>
-    <%= form.number_field :rating, min: 1, max: 5, class: "form-control" %>
+    <%= form.number_field :rating, class: "form-control" %>
   </div>
+
+
+  <div class="mb-4">
+    <%= form.label :franchise, "Franchise" %>
+    <%= form.text_field :franchise, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :image, "Cover Picture" %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+
+
+  <div class="mt-4">
+    <%= form.submit "Create Movie", class: "btn btn-primary" %>
+  </div>
+
 
   <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
     <%= link_to "Back to movies", movies_path, class: "btn" %>
   </div>
 
-  <div class="mt-4">
-    <%= form.submit "Create Movie", class: "btn btn-primary" %>
-  </div>
 <% end %>

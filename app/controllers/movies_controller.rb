@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @movie.save
         flash[:notice] = "Movie was successfully created"
-        format.html { redirect_to @movie }
+        format.html { redirect_to movies_path }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class MoviesController < ApplicationController
 
   # DELETE /movies/1 or /movies/1.json
   def destroy
-    @movie.destroy!
+    @movie.destroy
 
     respond_to do |format|
       format.html { redirect_to movies_path, status: :see_other, notice: "Movie was successfully destroyed." }
@@ -67,6 +67,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.expect(movie: [ :title, :director, :year, :description ])
+      params.require(:movie).permit(:title, :director, :year, :description, :rating, :franchise, :image)
     end
 end

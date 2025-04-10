@@ -2,8 +2,57 @@
 
 <h1 class="font-bold text-4xl mbe-4">New music</h1>
 
-<%= render "form", music: @music %>
+<%= form_with(model: @music, local: true) do |form| %>
 
+  <div class="mb-4">
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :artist, "Artist" %>
+    <%= form.text_field :artist, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :year, "Year Published" %>
+    <%= form.text_field :year, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :album, "Album" %>
+    <%= form.text_field :album, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :genre, "Genre" %>
+    <%= form.text_field :genre, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-4">
+    <%= form.label :rating, "Rating" %>
+    <%= form.number_field :rating, class: "form-control" %>
+  </div>
+
+
+  <div class="mt-4">
+    <%= form.submit "Create Music", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+<!-- Back Link -->
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
-  <%= link_to "Back to musics", musics_path, class: "btn" %>
+  <%= link_to "Back to music", musics_path, class: "btn" %>
 </div>
