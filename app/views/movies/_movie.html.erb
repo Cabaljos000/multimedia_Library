@@ -3,8 +3,8 @@
   <div class="flex justify-center mb-4">
     <% if movie.cover_picture.present? %>
       <%= image_tag movie.cover_picture, alt: "#{movie.title} cover", class: "movie-image rounded-lg shadow-md" %>
-    <% elsif movie.image.attached? %>
-      <%= image_tag movie.image, class: "movie-image rounded-lg shadow-md" %>
+    <% elsif movie.poster.attached? %>
+      <%= image_tag movie.poster, class: "movie-image rounded-lg shadow-md" %>
     <% end %>
   </div>
 
