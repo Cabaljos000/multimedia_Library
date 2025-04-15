@@ -73,6 +73,6 @@ class BooksController < ApplicationController
 
   # Updated strong params to include `cover_image` and other fields
   def book_params
-    params.require(:book).permit(:title, :publication_year, :description, :rating, :author, :genre, :cover_image)
+    params.require(:book).permit(:title, :year, :summary, :rating, :author, :genre, :poster)
   end
 end
