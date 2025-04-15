@@ -1,11 +1,7 @@
 <%= render @music %>
 
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
-  <%= link_to "Edit this music", edit_music_path(@music), class: "btn" %>
-  <%= link_to "Back to musics", musics_path, class: "btn" %>
-  <%= button_to "Delete this Song", @music, method: :delete, class: "btn" %>
+  <%= link_to "Edit this Song", edit_music_path(@music), class: "btn" %>
+  <%= link_to "Back to Music", musics_path, class: "btn" %>
+  <%= button_to "Delete", @music, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
 </div>
-
-<%= link_to "Edit", edit_music_path(@music), class: "btn btn--primary" %>
-<%= button_to "Delete", music_path(@music), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
-
