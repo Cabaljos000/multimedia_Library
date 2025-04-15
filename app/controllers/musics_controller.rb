@@ -1,6 +1,6 @@
 class MusicsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-
+  before_action :authenticate_user!
+  before_action :set_music, only: [:show, :edit, :update, :destroy]
 
   # GET /musics or /musics.json
   def index
@@ -19,17 +19,16 @@ class MusicsController < ApplicationController
 
   # GET /musics/1/edit
   def edit
-    @music = Music.find(params[:id])
-    render :edit
   end
 
   # POST /musics or /musics.json
   def create
-    @music = Music.new(music_params)
+    
+    @music = current_user.musics.new(music_params)
 
     respond_to do |format|
       if @music.save
-        flash[:notice] = "Music was successfully created"
+        flash[:notice] = "Saved!"
         format.html { redirect_to @music }
         format.json { render :show, status: :created, location: @music }
       else
@@ -44,7 +43,7 @@ class MusicsController < ApplicationController
     respond_to do |format|
       @music = Music.find(params[:id])
       if @music.update(music_params)
-        format.html { redirect_to @music, notice: "Music was successfully updated." }
+        format.html { redirect_to @music, notice: "Updated!" }
         format.json { render :show, status: :ok, location: @music }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,8 +58,32 @@ class MusicsController < ApplicationController
     @music.destroy!
 
     respond_to do |format|
-      format.html { redirect_to musics_path, status: :see_other, notice: "Music was successfully destroyed." }
+      format.html { redirect_to musics_path, status: :see_other, notice: "Deleted!" }
       format.json { head :no_content }
+    end
+  end
+
+  def search
+    query = params[:query]
+    track = SpotifyService.search_track(query)
+  
+    if track
+      release_date = track["album"]["release_date"] 
+      year = release_date[0, 4] 
+
+      artist_data = SpotifyService.get_artist(track["artists"].first["id"])
+      genre = artist_data["genres"].first || "Unknown"
+
+      render json: {
+        title: track["name"],
+        artist: track["artists"].map { |a| a["name"] }.join(", "),
+        album: track["album"]["name"],
+        image_url: track["album"]["images"].first["url"],
+        year: year,
+        genre: genre
+      }
+    else
+      render json: { error: "No track found" }, status: :not_found
     end
   end
 
@@ -72,6 +95,8 @@ class MusicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def music_params
-      params.require(:music).permit(:title, :artist, :album, :genre, :year, :description)
+
+      params.require(:music).permit(:title, :artist, :album, :genre, :year, :description, :image_url, :rating)
+
     end    
 end

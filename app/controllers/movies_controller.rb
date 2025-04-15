@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # GET /movies or /movies.json
   def index
@@ -15,12 +16,11 @@ class MoviesController < ApplicationController
   def new
     @movie = Movie.new
   end
-#-------------------------------------------------------------------------
+
   # GET /movies/1/edit
   def edit
     @movie = Movie.find(params[:id])
   end
-#-------------------------------------------------------------------------
 
   # POST /movies or /movies.json
   def create
@@ -75,7 +75,7 @@ class MoviesController < ApplicationController
 
     # ✅ Updated strong params to include `poster` and other fields
     def movie_params
-      params.require(:movie).permit(:title, :year, :description, :rating, :release_date, :director, :poster)
+      params.require(:movie).permit(:title, :year, :description, :rating, :director, :poster)
 
     end
 end

@@ -71,7 +71,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
-  # ✅ Updated strong params to include `cover_image` and other fields
+  # Updated strong params to include `cover_image` and other fields
   def book_params
     params.require(:book).permit(:title, :publication_year, :description, :rating, :author, :genre, :cover_image)
   end

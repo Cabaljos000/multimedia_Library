@@ -81,6 +81,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_045855) do
     t.integer "user_id"
     t.string "album"
     t.integer "rating"
+    t.string "image_url"
   end
 
   create_table "users", force: :cascade do |t|
