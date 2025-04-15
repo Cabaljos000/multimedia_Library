@@ -1,8 +1,10 @@
 <div id="<%= dom_id(music) %>" class="flex flex-col gap">
-  <!-- Image display -->
-  <div class="flex justify-center">
-    <%= image_tag music.image, class: "music-image" if music.image.attached? %>
-  </div>
+
+  <% if music.image_url.present? %>
+    <div class="flex justify-center">
+      <%= image_tag music.image_url, class: "music-image", style: "width: 150px; height: 150px;" %>
+    </div>
+  <% end %>
 
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Title:</h4>
@@ -34,13 +36,17 @@
     <h4 class="font-medium leading-none">Year:</h4>
     <p class="leading-none"><%= music.year %></p>
   </div>
-  <div class="flex flex-col gap-half">
+  <% if music.description.present? %>
+    <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Description:</h4>
     <p class="leading-none"><%= music.description %></p>
-  </div>
+    </div>
+  <% end %>
+  <% if music.rating.present? %>
+    <div class="flex flex-col gap-half">
+    <h4 class="font-medium leading-none">Rating:</h4>
+    <p class="leading-none"><%= music.rating %></p>
+    </div>
+  <% end %>
 
-  <div class="flex gap-2 mt-2">
-    <%= link_to "Edit", edit_music_path(music), class: "btn btn--primary" %>
-    <%= link_to "Delete", music_path(music), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
-  </div>
 </div>

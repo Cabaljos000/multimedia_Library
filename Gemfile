@@ -72,3 +72,7 @@ gem "css-zero", "~> 1.1"
 gem "webpacker", "~> 5.4"
 
 gem "tailwindcss-rails", "~> 4.2"
+
+gem "httpparty"
+
+gem "dotenv-rails", "~> 3.1"

@@ -7,7 +7,6 @@
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
   <%= link_to "Show this music", @music, class: "btn" %>
   <%= link_to "Back to musics", musics_path, class: "btn" %>
-  <%= link_to "Edit", edit_music_path(@music), class: "btn" %>
 </div>
 
 <%= form_with(model: @music, local: true) do |form| %>
@@ -22,22 +21,4 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :artist %>
-    <%= form.text_field :artist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :release_date %>
-    <%= form.date_select :release_date %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Confirm" %>
-  </div>
 <% end %>

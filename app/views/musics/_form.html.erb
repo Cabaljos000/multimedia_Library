@@ -41,11 +41,18 @@
     <%= form.number_field :year, class: "input" %>
   </div>
 
+  <div class="flex flex-col items-start gap-half mbe-4">
+  <%= form.label :rating, "Rating", class: "text-sm font-medium leading-none" %>
+  <%= form.number_field :rating, class: "input" %>
+  </div>
 
   <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :image, class: "text-sm font-medium leading-none" %>
-    <%= form.file_field :image, class: "input" %>
+    <%= form.hidden_field :image_url, id: "music_image_url" %>
+    <div id="spotify-image-container">
+    </div>
   </div>
 
   <div class="inline-flex items-center mbs-2 mie-1">
-    <%= form.submit "Save Music", class: "btn
+    <%= form.submit "Done", class: "btn" %>
+
+<% end %>
