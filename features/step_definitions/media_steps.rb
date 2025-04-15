@@ -62,4 +62,26 @@ Given("I am logged in") do
   Then("I should see a movie creation success message") do |error_message|
     expect(page).to have_content(error_message)
   end
+
+  When("I Delete {string}, {string}") do |media, title|
+    case media
+    when "movie"
+      Movie.find_by(title: title)&.destroy
+    when "book"
+      Book.find_by(title: title)&.destroy
+    when "music"
+      Music.find_by(title: title)&.destroy
+    end
+  end
+
+  When("I Edit {string}, {string}") do |media, title|
+    case media
+    when "movie"
+      Movie.find_by(title: title)&.update(title: "#{title} (Edited)")
+    when "book"
+      Book.find_by(title: title)&.update(title: "#{title} (Edited)")
+    when "music"
+      Music.find_by(title: title)&.update(title: "#{title} (Edited)")
+    end
+  end
   

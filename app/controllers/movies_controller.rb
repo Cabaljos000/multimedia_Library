@@ -16,12 +16,11 @@ class MoviesController < ApplicationController
   def new
     @movie = Movie.new
   end
-#-------------------------------------------------------------------------
+
   # GET /movies/1/edit
   def edit
     @movie = Movie.find(params[:id])
   end
-#-------------------------------------------------------------------------
 
   # POST /movies or /movies.json
   def create

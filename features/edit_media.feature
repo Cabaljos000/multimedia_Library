@@ -7,9 +7,7 @@ Feature: Editing Media
     Given I am logged in
     And a movie titled "Movie" exists
     When I visit the "movie" show page
-    And I press "Edit this Movie"
-    And I fill in "Title" with "Updated Movie Title"
-    And I press "Done"
+    And I Edit "movie", "Movie"
     Then I should see "Movie was successfully Edited"
     And I should see "Updated Movie Title"
 
@@ -18,9 +16,7 @@ Feature: Editing Media
     Given I am logged in
     And a book titled "Book" exists
     When I visit the "book" show page
-    And I press "Edit this Book"
-    And I fill in "Title" with "Updated Book Title"
-    And I press "Done"
+    And I Edit "book", "Book"
     Then I should see "Book was successfully Edited"
     And I should see "Updated Book Title"
 
@@ -29,8 +25,6 @@ Feature: Editing Media
     Given I am logged in
     And a music titled "Music" exists
     When I visit the "music" show page
-    And I press "Edit this Song"
-    And I fill in "Title" with "Updated Music Title"
-    And I press "Done"
+    And I Edit "music", "Music"
     Then I should see "Music was successfully Edited"
     And I should see "Updated Music Title"
