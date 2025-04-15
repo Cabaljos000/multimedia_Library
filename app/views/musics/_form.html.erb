@@ -11,37 +11,31 @@
     </div>
   <% end %>
 
-  <!-- Title -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :title, class: "text-sm font-medium leading-none" %>
     <%= form.text_field :title, class: "input" %>
   </div>
 
-  <!-- Artist -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :artist, class: "text-sm font-medium leading-none" %>
     <%= form.text_field :artist, class: "input" %>
   </div>
 
-  <!-- Year -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :year, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :year, class: "input" %>
-  </div>
-
-  <!-- Rating -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :rating, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :rating, in: 0..5, class: "input" %>
-  </div>
-
-  <!-- Album -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :album, class: "text-sm font-medium leading-none" %>
     <%= form.text_field :album, class: "input" %>
   </div>
 
-  <!-- Description -->
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :genre, class: "text-sm font-medium leading-none" %>
+    <%= form.text_field :genre, class: "input" %>
+  </div>
+
+  <div class="flex flex-col items-start gap-half mbe-4">
+    <%= form.label :year, class: "text-sm font-medium leading-none" %>
+    <%= form.number_field :year, class: "input" %>
+  </div>
+
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :description, class: "text-sm font-medium leading-none" %>
     <%= form.text_area :description, class: "input" %>
