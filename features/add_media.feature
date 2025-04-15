@@ -25,9 +25,9 @@ Feature: Adding Media
     And I fill in "Year" with "2010"  
     And I fill in "Genre" with "Fantasy"  
     And I fill in "Franchise" with "Yes"  
-    And I fill in "Description" with "A Good Book"  
+    And I fill in "Summary" with "A Good Book"  
     And I fill in "Rating" with "5"  
-    And I press "Create Book"
+    And I press "Done"
     Then I should see "Book was successfully created"
     And I should see "New Book"
 

@@ -1,16 +1,23 @@
-<%= render @book %>
+<div class="w-48 h-72 rounded overflow-hidden shadow-lg">
+  <% if @book.poster.attached? %>
+    <%= image_tag @book.poster.variant(resize_to_fill: [200, 300]), alt: @book.title, class: "w-full h-full object-cover" %>
+  <% else %>
+    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+        <span class="text-sm text-gray-500">No Image</span>
+    </div>
+  <% end %>
+</div>
 
-<h1><%= @book.title %></h1>
-<p><%= @book.description %></p>
-<p>Release Date: <%= @book.release_date %></p>
-<p>Author: <%= @book.author %></p>  <!-- New field -->
-<p>Genre: <%= @book.genre %></p>
+<h1 class="text-2xl font-bold mb-2"><%= @book.title %></h1>
+<p class="mb-1">Release Date: <%= @book.year %></p>
+<p class="mb-1">Rating: <%= @book.rating %></p>
+<p class="mb-1">Author: <%= @book.author %></p>
+<p class="mb-1">Franchise: <%= @book.franchise %></p>
+<p class="mb-1">Summary: <%= @book.summary %></p>
 
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
   <%= link_to "Edit this book", edit_book_path(@book), class: "btn" %>
   <%= link_to "Back to books", books_path, class: "btn" %>
-  <%= button_to "Destroy this book", @book, method: :delete, class: "btn" %>
+  <%= button_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
 </div>
 
-<%= link_to "Edit", edit_book_path(@book), class: "btn btn--primary" %>
-<%= button_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
