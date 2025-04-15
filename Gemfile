@@ -69,8 +69,6 @@ gem "devise", "~> 4.9"
 
 gem "css-zero", "~> 1.1"
 
-gem "webpacker", "~> 5.4"
-
 gem "tailwindcss-rails", "~> 4.2"
 
 gem "httpparty"
