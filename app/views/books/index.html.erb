@@ -5,11 +5,26 @@
   <%= link_to "New book", new_book_path, class: "btn btn--primary" %>
 </div>
 
-<div id="books" class="flex flex-col" style="gap: 2rem;">
-  <% @book.each do |book| %>
-    <div class="flex flex-col items-start gap">
-      <%= render book %>
-      <%= link_to "Show this book", book, class: "btn" %>
-    </div>
-  <% end %>
+<div id="books" class="overflow-x-auto">
+  <div class="flex items-start gap-8 px-2 py-4 w-max">
+    <% @books.each do |book| %>
+      <div class="flex flex-col items-center w-48">
+        <%= link_to book_path(book), class: "group" do %>
+          <div class="w-48 h-72 rounded overflow-hidden shadow-lg transform transition-transform duration-200 group-hover:scale-105">
+            <% if book.poster.attached? %>
+              <%= image_tag book.poster.variant(resize_to_fill: [200, 300]), alt: book.title, class: "w-full h-full object-cover" %>
+            <% else %>
+              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-sm text-gray-500 text-center">No Image</span>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="mt-2 text-center text-sm font-semibold text-gray-800 w-full truncate">
+            <%= book.title %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
