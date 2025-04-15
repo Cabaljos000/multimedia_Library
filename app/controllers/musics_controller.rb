@@ -1,5 +1,6 @@
 class MusicsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!
+  before_action :set_music, only: [:show, :edit, :update, :destroy]
 
 
   # GET /musics or /musics.json
@@ -19,13 +20,12 @@ class MusicsController < ApplicationController
 
   # GET /musics/1/edit
   def edit
-    @music = Music.find(params[:id])
-    render :edit
   end
 
   # POST /musics or /musics.json
   def create
     @music = Music.new(music_params)
+    @music.user = current_user
 
     respond_to do |format|
       if @music.save
@@ -72,6 +72,6 @@ class MusicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def music_params
-      params.require(:music).permit(:title, :artist, :album, :genre, :year, :description)
+      params.require(:music).permit(:title, :artist, :album, :genre, :year, :description, :poster)
     end    
 end
