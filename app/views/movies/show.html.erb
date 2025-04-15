@@ -2,8 +2,6 @@
   <%= image_tag @movie.poster.variant(resize_to_limit: [300, 450]), class: "rounded mb-4 shadow-md" %>
 <% end %>
 
-
-
 <h1 class="text-2xl font-bold mb-2"><%= @movie.title %></h1>
 <p class="mb-1"><%= @movie.description %></p>
 <p class="mb-1">Release Date: <%= @movie.year %></p>
@@ -11,6 +9,7 @@
 <p class="mb-1">Director: <%= @movie.director %></p>
 <p class="mb-1">Franchise: <%= @movie.franchise %></p>
 <p class="mb-1">Description: <%= @movie.description %></p>
+
 
 
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">

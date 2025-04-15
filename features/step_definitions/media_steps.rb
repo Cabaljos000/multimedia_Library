@@ -7,7 +7,7 @@ Given("I am logged in") do
   end
   
   Given("a movie titled {string} exists") do |title|
-    Movie.create(title: title, year: 2010, description: "A great movie")
+    Movie.create(title: title, year: 2010, description: "A great movie", user: @user)
   end
 
   Given("a book titled {string} exists") do |title|
