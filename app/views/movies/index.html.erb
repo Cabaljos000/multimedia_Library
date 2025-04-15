@@ -1,22 +1,30 @@
 <% content_for :title, "Movies" %>
 
-<div class="flex items-center justify-between mbe-4">
+<div class="flex items-center justify-between mb-4">
   <h1 class="font-bold text-4xl">Movies</h1>
   <%= link_to "New movie", new_movie_path, class: "btn btn--primary" %>
 </div>
 
-<div id="movies" class="flex flex-col" style="gap: 2rem;">
-  <% @movies.each do |movie| %>
-    <div class="flex flex-col items-start gap">
-    <%= link_to movie_path(movie) do %>
-      <% if movie.poster.attached? %>
-        <%= image_tag movie.poster.variant(resize_to_limit: [200, 300]), alt: movie.title, class: "rounded shadow-lg hover:scale-105 transition-transform duration-200" %>
-      <% else %>
-        <div class="w-48 h-64 bg-gray-200 flex items-center justify-center rounded shadow-inner">
-          <span class="text-sm text-gray-500">No Image</span>
+<!-- Horizontal Scrollable Container -->
+<div id="movies" class="overflow-x-auto">
+  <div class="flex items-start gap-8 px-2 py-4 w-max">
+    <% @movies.each do |movie| %>
+      <div class="flex flex-col items-center w-48">
+        <%= link_to movie_path(movie), class: "transition-transform transform hover:scale-105 duration-200" do %>
+          <% if movie.poster.attached? %>
+            <%= image_tag movie.poster, alt: "#{movie.title} cover", class: "w-auto h-auto rounded-lg shadow-md" %>
+          <% else %>
+            <div class="w-48 h-72 bg-gray-200 flex items-center justify-center rounded shadow-inner">
+              <span class="text-sm text-gray-500">No Image</span>
+            </div>
+          <% end %>
+        <% end %>
+
+        <!--Title Below Image -->
+        <div class="mt-2 text-center text-sm font-semibold text-gray-800">
+          <%= movie.title %>
         </div>
-      <% end %>
+      </div>
     <% end %>
-    </div>
-  <% end %>
+  </div>
 </div>

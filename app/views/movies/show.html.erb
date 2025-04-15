@@ -1,5 +1,5 @@
 <% if @movie.poster.attached? %>
-  <%= image_tag @movie.poster.variant(resize_to_limit: [300, 450]), class: "rounded mb-4 shadow-md" %>
+  <%= image_tag @movie.poster, alt: "#{@movie.title} cover", class: "w-40 h-auto rounded-lg shadow-md" %>
 <% end %>
 
 <h1 class="text-2xl font-bold mb-2"><%= @movie.title %></h1>
@@ -7,11 +7,13 @@
 <p class="mb-1">Release Date: <%= @movie.year %></p>
 <p class="mb-1">Rating: <%= @movie.rating %></p>
 <p class="mb-1">Director: <%= @movie.director %></p>
+<p class="mb-1">Franchise: <%= @movie.franchise %></p>
+<p class="mb-1">Description: <%= @movie.description %></p>
 
 
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
-  <%= link_to "Edit this movie", edit_movie_path(@movie), class: "btn" %>
-  <%= link_to "Back to movies", movies_path, class: "btn" %>
-  <%= button_to "Destroy this movie", @movie, method: :delete, class: "btn" %>
+  <%= link_to "Edit this Movie", edit_movie_path(@movie), class: "btn" %>
+  <%= link_to "Back to Movies", movies_path, class: "btn" %>
+  <%= button_to "Delete", @movie, method: :delete, class: "btn" %>
 </div>
 
