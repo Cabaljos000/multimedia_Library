@@ -1,19 +1,22 @@
-<% if @movie.poster.attached? %>
-  <%= image_tag @movie.poster, alt: "#{@movie.title} cover", class: "w-40 h-auto rounded-lg shadow-md" %>
-<% end %>
+<div class="w-48 h-72 rounded overflow-hidden shadow-lg">
+  <% if @movie.poster.attached? %>
+    <%= image_tag @movie.poster.variant(resize_to_fill: [200, 300]), alt: @movie.title, class: "w-full h-full object-cover" %>
+  <% else %>
+    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+        <span class="text-sm text-gray-500">No Image</span>
+    </div>
+  <% end %>
+</div>
 
 <h1 class="text-2xl font-bold mb-2"><%= @movie.title %></h1>
-<p class="mb-1"><%= @movie.description %></p>
 <p class="mb-1">Release Date: <%= @movie.year %></p>
 <p class="mb-1">Rating: <%= @movie.rating %></p>
 <p class="mb-1">Director: <%= @movie.director %></p>
 <p class="mb-1">Franchise: <%= @movie.franchise %></p>
 <p class="mb-1">Description: <%= @movie.description %></p>
 
-
-<div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
+<div class="flex flex-wrap items-center gap mb-6" style="--row-gap: .5rem">
   <%= link_to "Edit this Movie", edit_movie_path(@movie), class: "btn" %>
   <%= link_to "Back to Movies", movies_path, class: "btn" %>
-  <%= button_to "Delete", @movie, method: :delete, class: "btn" %>
+  <%= button_to "Delete", @movie, method: :delete, data: { confirm: "Are you sure?" }, class: "btn" %>
 </div>
-

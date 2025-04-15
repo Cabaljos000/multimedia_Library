@@ -1,22 +1,36 @@
 <h1>Welcome to the Project</h1>
 
-<div class="flex items-center justify-between mbe-4">
-  <h2 class="font-bold text-2xl">Movies</h2>
-  <%= link_to "New Movie", new_movie_path, class: "btn btn--primary" %>
+<div class="flex items-center justify-between mb-4">
+  <h1 class="font-bold text-4xl">Movies</h1>
+  <%= link_to "New movie", new_movie_path, class: "btn btn--primary" %>
 </div>
 
-<div id="movies" class="flex flex-col" style="gap: 2rem;">
-  <% if @movies.present? %>
+<!-- Horizontal Scrollable Container -->
+<div id="movies" class="overflow-x-auto">
+  <div class="flex items-start gap-8 px-2 py-4 w-max">
     <% @movies.each do |movie| %>
-      <div class="flex flex-col items-start gap">
-        <%= render partial: "movies/movie", locals: { movie: movie } %>
-        <%= link_to "Show this movie", movie, class: "btn" %>
+      <div class="flex flex-col items-center w-48">
+        <!-- Link wraps entire movie card -->
+        <%= link_to movie_path(movie), class: "group" do %>
+          <div class="w-48 h-72 rounded overflow-hidden shadow-lg transform transition-transform duration-200 group-hover:scale-105">
+            <% if movie.poster.attached? %>
+              <%= image_tag movie.poster.variant(resize_to_fill: [200, 300]), alt: movie.title, class: "w-full h-full object-cover" %>
+            <% else %>
+              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-sm text-gray-500 text-center">No Image</span>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="mt-2 text-center text-sm font-semibold text-gray-800 w-full truncate">
+            <%= movie.title %>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  <% else %>
-    <p>No movies found.</p>
-  <% end %>
+  </div>
 </div>
+
 
 <div class="flex items-center justify-between mbe-4">
   <h2 class="font-bold text-2xl">Books</h2>
