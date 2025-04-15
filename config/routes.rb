@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :musics
+  resources :musics do
+    collection do
+      get :search
+    end
+  end
   resources :books
   resources :movies
   devise_for :users

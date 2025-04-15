@@ -47,18 +47,18 @@
     <%= form.text_area :description, class: "input" %>
   </div>
 
-  <!-- Genre -->
   <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :genre, class: "text-sm font-medium leading-none" %>
-    <%= form.text_area :genre, class: "input" %>
+  <%= form.label :rating, "Rating", class: "text-sm font-medium leading-none" %>
+  <%= form.number_field :rating, class: "input" %>
   </div>
 
   <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :poster, "Upload Poster", class: "text-sm font-medium leading-none" %>
-    <%= form.file_field :poster, class: "input" %>
+    <%= form.hidden_field :image_url, id: "music_image_url" %>
+    <div id="spotify-image-container">
+    </div>
   </div>
 
   <div class="inline-flex items-center mbs-2 mie-1">
-    <%= form.submit "Done", class: "btn btn--primary" %>
-  </div>
+    <%= form.submit "Done", class: "btn" %>
+
 <% end %>

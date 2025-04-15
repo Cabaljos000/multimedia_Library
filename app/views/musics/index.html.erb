@@ -8,17 +8,14 @@
 <div id="music" class="flex flex-col" style="gap: 2rem;">
   <% @musics.each do |music| %>
     <div class="flex flex-col items-start gap">
-    <h1>Title: <%= music.title %> </h1>
-    <p>Artist: <%= music.artist %></p>
-    <% if music.album.present? %>
-    <p>Album: <%= music.album %></p>
+    <% if music.image_url.present? %>
+    <div class="flex justify-center">
+      <%= image_tag music.image_url, class: "music-image", style: "width: 150px; height: 150px;" %>
+    </div>
     <% end %>
-    <% if music.description.present? %>
-    <p>Description: <%= music.description %></p>
-    <% end %>
-    <p>Release Date: <%= music.year %></p>
-    <p>Genre: <%= music.genre %></p>
+    <h1><%= music.title %> By:  <%= music.artist %></h1>
     <%= link_to "Show this music", music, class: "btn" %>
     </div>
   <% end %>
+
 </div>
