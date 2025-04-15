@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <div class="flex justify-center mb-4">
+    <% if movie.poster.attached? %>
+      <%= image_tag movie.poster, alt: "#{movie.title} cover", class: "w-40 h-auto rounded-lg shadow-md" %>
+    <% end %>
+  </div>
+
   <!-- Title -->
   <div class="flex flex-col items-start gap-half mbe-4">
     <%= form.label :title, class: "text-sm font-medium leading-none" %>
@@ -47,8 +53,9 @@
     <%= form.text_area :description, class: "input" %>
   </div>
 
+  <!-- Movie Poster Upload Field -->
   <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :poster, "Upload Poster", class: "text-sm font-medium leading-none" %>
+    <%= form.label :poster, "Upload Movie Poster", class: "text-sm font-medium leading-none" %>
     <%= form.file_field :poster, class: "input" %>
   </div>
 
