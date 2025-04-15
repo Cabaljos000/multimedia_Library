@@ -76,7 +76,7 @@ class MoviesController < ApplicationController
 
     # ✅ Updated strong params to include `poster` and other fields
     def movie_params
-      params.require(:movie).permit(:title, :year, :description, :rating, :release_date, :director, :poster)
+      params.require(:movie).permit(:title, :year, :description, :rating, :director, :poster)
 
     end
 end
