@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books or /books.json
@@ -19,6 +19,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book = Book.find(params[:id])
   end
 
   # POST /books or /books.json
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         flash[:notice] = "Book was successfully created"
-        format.html { redirect_to @book }
+        format.html { redirect_to books_path }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,6 +41,7 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1 or /books/1.json
   def update
+    @book = Book.find(params[:id])
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: "Book was successfully updated." }
@@ -53,22 +55,24 @@ class BooksController < ApplicationController
 
   # DELETE /books/1 or /books/1.json
   def destroy
-    @book.destroy!
+    @book = Book.find(params[:id])
+    @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_path, status: :see_other, notice: "Book was successfully destroyed." }
+      format.html { redirect_to books_path, notice: "Book was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def book_params
-      params.require(:book).permit(:title, :author, :year, :genre, :franchise, :rating, :summary, :poster)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  # Updated strong params to include `cover_image` and other fields
+  def book_params
+    params.require(:book).permit(:title, :publication_year, :description, :rating, :author, :genre, :cover_image)
+  end
 end
