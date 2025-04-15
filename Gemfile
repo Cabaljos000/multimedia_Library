@@ -76,3 +76,5 @@ gem "tailwindcss-rails", "~> 4.2"
 gem "httpparty"
 
 gem "dotenv-rails", "~> 3.1"
+
+gem "pg"
