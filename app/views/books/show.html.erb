@@ -1,16 +1,15 @@
-<%= render @book %>
+<% if @book.cover_image.attached? %>
+  <%= image_tag @book.cover_image.variant(resize_to_limit: [300, 450]), class: "rounded mb-4 shadow-md" %>
+<% end %>
 
-<h1><%= @book.title %></h1>
-<p><%= @book.description %></p>
-<p>Release Date: <%= @book.release_date %></p>
-<p>Author: <%= @book.author %></p>  <!-- New field -->
-<p>Genre: <%= @book.genre %></p>
+<h1 class="text-2xl font-bold mb-2"><%= @book.title %></h1>
+<p class="mb-1"><%= @book.description %></p>
+<p class="mb-1">Publication Year: <%= @book.publication_year %></p>
+<p class="mb-1">Rating: <%= @book.rating %></p>
+<p class="mb-1">Author: <%= @book.author %></p>
 
 <div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
   <%= link_to "Edit this book", edit_book_path(@book), class: "btn" %>
   <%= link_to "Back to books", books_path, class: "btn" %>
   <%= button_to "Destroy this book", @book, method: :delete, class: "btn" %>
 </div>
-
-<%= link_to "Edit", edit_book_path(@book), class: "btn btn--primary" %>
-<%= button_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>

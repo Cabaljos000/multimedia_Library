@@ -5,7 +5,6 @@
   <%= link_to "New movie", new_movie_path, class: "btn btn--primary" %>
 </div>
 
-<!-- Horizontal Scrollable Container -->
 <div id="movies" class="overflow-x-auto">
   <div class="flex items-start gap-8 px-2 py-4 w-max">
     <% @movies.each do |movie| %>

@@ -1,28 +1,48 @@
-<div id="<%= dom_id(book) %>" class="flex flex-col gap">
-  <!-- Image display -->
-  <div class="flex justify-center">
-    <%= image_tag book.image, class: "book-image" if book.image.attached? %>
+<div id="<%= dom_id(book) %>" class="flex flex-col gap p-4 rounded-xl shadow bg-white">
+
+  <div class="flex justify-center mb-4">
+    <% if book.cover_picture.present? %>
+      <%= image_tag book.cover_picture, alt: "#{book.title} cover", class: "book-image rounded-lg shadow-md" %>
+    <% elsif book.cover_image.attached? %>
+      <%= image_tag book.cover_image, class: "book-image rounded-lg shadow-md" %>
+    <% end %>
   </div>
 
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Title:</h4>
-    <p class="leading-none"><%= book.title %></p>
-  </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Author:</h4>
-    <p class="leading-none"><%= book.author %></p>
-  </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Year Published:</h4>
-    <p class="leading-none"><%= book.year_published %></p>
-  </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Description:</h4>
-    <p class="leading-none"><%= book.description %></p>
+  <div class="flex flex-col gap-2">
+    <div>
+      <h4 class="font-semibold">Title:</h4>
+      <p><%= book.title %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Author:</h4>
+      <p><%= book.author %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Year Published:</h4>
+      <p><%= book.publication_year %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Rating:</h4>
+      <p><%= book.rating %>/5</p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Genre:</h4>
+      <p><%= book.genre %></p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold">Description:</h4>
+      <p><%= book.description %></p>
+    </div>
   </div>
 
-  <div class="flex gap-2 mt-2">
+  <div class="flex gap-2 mt-4">
     <%= link_to "Edit", edit_book_path(book), class: "btn btn--primary" %>
     <%= link_to "Delete", book_path(book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
   </div>
+
 </div>

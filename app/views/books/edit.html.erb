@@ -7,7 +7,6 @@
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
   <%= link_to "Show this book", @book, class: "btn" %>
   <%= link_to "Back to books", books_path, class: "btn" %>
-  <%= link_to "Edit", edit_book_path(@book), class: "btn" %>
 </div>
 
 <%= form_with(model: @book, local: true) do |form| %>
@@ -20,24 +19,6 @@
         <% end %>
       </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
-
-  <div class="field">
-    <%= form.label :publication_date %>
-    <%= form.date_select :publication_date %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Confirm" %>
+  <% end %>  
   </div>
 <% end %>
