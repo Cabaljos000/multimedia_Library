@@ -1,6 +1,6 @@
 <div class="w-48 h-72 rounded overflow-hidden shadow-lg">
   <% if @movie.poster.attached? %>
-    <%= image_tag @movie.poster.variant(resize_to_fill: [200, 300]), alt: @movie.title, class: "w-full h-full object-cover" %>
+    <%= image_tag @movie.poster.variant(resize_to_fill: [200, 300]), class: "w-full h-full object-cover" %>
   <% else %>
     <div class="w-full h-full bg-gray-200 flex items-center justify-center">
         <span class="text-sm text-gray-500">No Image</span>
