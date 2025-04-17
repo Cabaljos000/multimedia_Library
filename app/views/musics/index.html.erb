@@ -8,11 +8,13 @@
 <div id="music" class="overflow-x-auto pb-4">
   <div class="flex items-start gap-6 w-max">
     <% @musics.each do |music| %>
-      <div class="flex flex-col items-center w-48">
+      <div class="flex flex-col items-center w-48 shrink-0">
         <%= link_to music_path(music), class: "group w-full" do %>
           <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
-            <% if music.poster.attached? %>
-              <%= image_tag music.poster.variant(resize_to_fill: [200, 300]), alt: music.title, class: "w-full h-full object-cover" %>
+            <% if music.image_url.present? %>
+              <div class="flex justify-center">
+                <%= image_tag music.image_url, class: "music-image", style: "width: 300px; height: 300px;" %>
+              </div>
             <% else %>
               <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                 <span class="text-sm text-gray-500 text-center">No Image</span>
@@ -20,7 +22,8 @@
             <% end %>
           </div>
           <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
-            <%= music.title %> By: <%= music.artist %>
+              <%= music.title %><br>
+              <span class="text-gray-600 font-medium text-xs">By: <%= music.artist %></span>
           </div>
         <% end %>
       </div>

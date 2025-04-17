@@ -19,12 +19,21 @@ class SpotifyService
     end
   
     def self.search_track(query)
-      response = HTTParty.get("https://api.spotify.com/v1/search",
+      response = HTTParty.get(
+        "https://api.spotify.com/v1/search",
         headers: { "Authorization" => "Bearer #{token}" },
         query: { q: query, type: "track", limit: 1 }
       )
-      response.parsed_response["tracks"]["items"].first
+    
+      if response.success?
+        items = response.parsed_response.dig("tracks", "items")
+        return items.first if items.present?
+      end
+    
+      Rails.logger.error "Spotify search failed: #{response.code} - #{response.body}"
+      nil
     end
+    
     
     def self.get_artist(artist_id)
       token = self.token

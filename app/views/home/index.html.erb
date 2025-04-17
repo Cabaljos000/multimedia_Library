@@ -1,6 +1,6 @@
 <h1 class="text-3xl font-bold mb-8 text-center">Welcome to the Project</h1>
 
-<% [["Movies", @movies, new_movie_path, :movie_path], ["Books", @books, new_book_path, :book_path], ["Music", @musics, new_music_path, :music_path]].each do |label, collection, new_path, item_path| %>
+<% [["Movies", @movies, new_movie_path, :movie_path], ["Books", @books, new_book_path, :book_path]].each do |label, collection, new_path, item_path| %>
   <div class="flex items-center justify-between mt-12 mb-4">
     <h2 class="text-2xl font-bold"><%= label %></h2>
     <%= link_to "New #{label.singularize}", new_path, class: "px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" %>
@@ -30,3 +30,31 @@
     </div>
   </div>
 <% end %>
+
+<div class="flex items-center justify-between mt-12 mb-4">
+  <h2 class="text-2xl font-bold">Music</h2>
+  <%= link_to "New Music", new_music_path, class: "px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" %>
+</div>
+
+<div class="overflow-x-auto pb-4">
+  <div class="flex items-start gap-6 w-max">
+    <% @musics.each do |music| %>
+      <div class="flex flex-col items-center w-48 shrink-0">
+        <%= link_to music_path(music), class: "group w-full" do %>
+          <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
+            <% if music.image_url.present? %>
+              <%= image_tag music.image_url, class: "music-image", style: "width: 300px; height: 300px;" %>
+            <% else %>
+              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-sm text-gray-500 text-center">No Image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
+            <%= music.title %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

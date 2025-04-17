@@ -1,8 +1,10 @@
 <div class="max-w-xl mx-auto p-6 bg-white shadow rounded-lg">
   <div class="flex flex-col md:flex-row gap-6 mb-6">
     <div class="w-48 h-72 rounded-lg overflow-hidden shadow-md">
-      <% if @music.poster.attached? %>
-        <%= image_tag @music.poster.variant(resize_to_fill: [200, 300]), alt: @music.title, class: "w-full h-full object-cover" %>
+      <% if @music.image_url.present? %>
+      <div class="flex justify-center">
+        <%= image_tag @music.image_url, class: "music-image", style: "width: 300px; height: 300px;" %>
+      </div>
       <% else %>
         <div class="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
           No Image
@@ -20,10 +22,12 @@
     </div>
   </div>
 
-  <div class="mb-6">
-    <h2 class="text-xl font-semibold mb-2">Description</h2>
-    <p class="text-gray-700"><%= @music.description %></p>
-  </div>
+  <% if @music.description.present? %>
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Description</h2>
+      <p class="text-gray-700"><%= @music.description %></p>
+    </div>
+  <% end %>
 
   <div class="flex flex-wrap gap-4">
     <%= link_to "Edit", edit_music_path(@music), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>
