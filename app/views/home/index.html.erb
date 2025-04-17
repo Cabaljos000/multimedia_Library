@@ -1,69 +1,32 @@
-<h1>Welcome to the Project</h1>
+<h1 class="text-3xl font-bold mb-8 text-center">Welcome to the Project</h1>
 
-<div class="flex items-center justify-between mb-4">
-  <h1 class="font-bold text-4xl">Movies</h1>
-  <%= link_to "New movie", new_movie_path, class: "btn btn--primary" %>
-</div>
-
-<!-- Horizontal Scrollable Container -->
-<div id="movies" class="overflow-x-auto">
-  <div class="flex items-start gap-8 px-2 py-4 w-max">
-    <% @movies.each do |movie| %>
-      <div class="flex flex-col items-center w-48">
-        <!-- Link wraps entire movie card -->
-        <%= link_to movie_path(movie), class: "group" do %>
-          <div class="w-48 h-72 rounded overflow-hidden shadow-lg transform transition-transform duration-200 group-hover:scale-105">
-            <% if movie.poster.attached? %>
-              <%= image_tag movie.poster.variant(resize_to_fill: [200, 300]), alt: movie.title, class: "w-full h-full object-cover" %>
-            <% else %>
-              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span class="text-sm text-gray-500 text-center">No Image</span>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="mt-2 text-center text-sm font-semibold text-gray-800 w-full truncate">
-            <%= movie.title %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+<% [["Movies", @movies, new_movie_path, :movie_path], ["Books", @books, new_book_path, :book_path], ["Music", @musics, new_music_path, :music_path]].each do |label, collection, new_path, item_path| %>
+  <div class="flex items-center justify-between mt-12 mb-4">
+    <h2 class="text-2xl font-bold"><%= label %></h2>
+    <%= link_to "New #{label.singularize}", new_path, class: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" %>
   </div>
-</div>
 
+  <div class="overflow-x-auto pb-4">
+    <div class="flex items-start gap-6 w-max">
+      <% collection.each do |item| %>
+        <div class="flex flex-col items-center w-48">
+          <%= link_to send(item_path, item), class: "group w-full" do %>
+            <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
+              <% if item.poster.attached? %>
+                <%= image_tag item.poster.variant(resize_to_fill: [200, 300]), alt: item.title, class: "w-full h-full object-cover" %>
+              <% else %>
+                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <span class="text-sm text-gray-500 text-center">No Image</span>
+                </div>
+              <% end %>
+            </div>
+            <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
+              <%= item.title %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
-<div class="flex items-center justify-between mbe-4">
-  <h2 class="font-bold text-2xl">Books</h2>
-  <%= link_to "New Book", new_book_path, class: "btn btn--primary" %>
-</div>
-
-<div id="books" class="flex flex-col" style="gap: 2rem;">
-  <% if @books.present? %>
-    <% @books.each do |book| %>
-      <div class="flex flex-col items-start gap">
-        <%= render partial: "books/book", locals: { book: book } %>
-        <%= link_to "Show this book", book, class: "btn" %>
-      </div>
-    <% end %>
-  <% else %>
-    <p>No books found.</p>
-  <% end %>
-</div>
-
-<div class="flex items-center justify-between mbe-4">
-  <h2 class="font-bold text-2xl">Music</h2>
-  <%= link_to "New Music", new_music_path, class: "btn btn--primary" %>
-</div>
-
-<div id="musics" class="flex flex-col" style="gap: 2rem;">
-  <% if @musics.present? %>
-    <% @musics.each do |music| %>
-      <div class="flex flex-col items-start gap">
-        <%= render partial: "musics/music", locals: { music: music } %>
-        <%= link_to "Show this music", music, class: "btn" %>
-      </div>
-    <% end %>
-  <% else %>
-    <p>No music found.</p>
-  <% end %>
-</div>

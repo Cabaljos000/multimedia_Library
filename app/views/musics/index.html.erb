@@ -1,21 +1,30 @@
 <% content_for :title, "Music" %>
 
-<div class="flex items-center justify-between mbe-4">
-  <h1 class="font-bold text-4xl">Musics</h1>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="font-bold text-4xl">Music</h1>
   <%= link_to "New music", new_music_path, class: "btn btn--primary" %>
 </div>
 
-<div id="music" class="flex flex-col" style="gap: 2rem;">
-  <% @musics.each do |music| %>
-    <div class="flex flex-col items-start gap">
-    <% if music.image_url.present? %>
-    <div class="flex justify-center">
-      <%= image_tag music.image_url, class: "music-image", style: "width: 150px; height: 150px;" %>
-    </div>
+<div id="music" class="overflow-x-auto pb-4">
+  <div class="flex items-start gap-6 w-max">
+    <% @musics.each do |music| %>
+      <div class="flex flex-col items-center w-48">
+        <%= link_to music_path(music), class: "group w-full" do %>
+          <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
+            <% if music.poster.attached? %>
+              <%= image_tag music.poster.variant(resize_to_fill: [200, 300]), alt: music.title, class: "w-full h-full object-cover" %>
+            <% else %>
+              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-sm text-gray-500 text-center">No Image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
+            <%= music.title %> By: <%= music.artist %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-    <h1><%= music.title %> By:  <%= music.artist %></h1>
-    <%= link_to "Show this music", music, class: "btn" %>
-    </div>
-  <% end %>
-
+  </div>
 </div>
+

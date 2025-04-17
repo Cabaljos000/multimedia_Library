@@ -1,48 +1,16 @@
-<div id="<%= dom_id(book) %>" class="flex flex-col gap p-4 rounded-xl shadow bg-white">
-
-  <div class="flex justify-center mb-4">
-    <% if book.cover_picture.present? %>
-      <%= image_tag book.cover_picture, alt: "#{book.title} cover", class: "book-image rounded-lg shadow-md" %>
-    <% elsif book.cover_image.attached? %>
-      <%= image_tag book.cover_image, class: "book-image rounded-lg shadow-md" %>
-    <% end %>
-  </div>
-
-  <div class="flex flex-col gap-2">
-    <div>
-      <h4 class="font-semibold">Title:</h4>
-      <p><%= book.title %></p>
+<div id="<%= dom_id(book) %>" class="flex flex-col items-center w-48">
+  <%= link_to book_path(book), class: "group w-full" do %>
+    <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
+      <% if book.poster.attached? %>
+        <%= image_tag book.poster.variant(resize_to_fill: [200, 300]), alt: book.title, class: "w-full h-full object-cover" %>
+      <% else %>
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+          <span class="text-sm text-gray-500 text-center">No Image</span>
+        </div>
+      <% end %>
     </div>
-
-    <div>
-      <h4 class="font-semibold">Author:</h4>
-      <p><%= book.author %></p>
+    <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
+      <%= book.title %>
     </div>
-
-    <div>
-      <h4 class="font-semibold">Year Published:</h4>
-      <p><%= book.publication_year %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Rating:</h4>
-      <p><%= book.rating %>/5</p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Genre:</h4>
-      <p><%= book.genre %></p>
-    </div>
-
-    <div>
-      <h4 class="font-semibold">Description:</h4>
-      <p><%= book.description %></p>
-    </div>
-  </div>
-
-  <div class="flex gap-2 mt-4">
-    <%= link_to "Edit", edit_book_path(book), class: "btn btn--primary" %>
-    <%= link_to "Delete", book_path(book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
-  </div>
-
+  <% end %>
 </div>
