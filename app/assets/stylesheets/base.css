@@ -1,50 +1,61 @@
 :root {
-  /* Abstractions */
-  --color-bg: white;
-  --color-text: black;
-  --color-text-reversed: white;
-  --color-text-subtle: var(--zinc-500);
-  --color-link: var(--blue-700);
-  --color-border-light: var(--zinc-100);
-  --color-border: var(--zinc-200);
-  --color-border-dark: var(--zinc-400);
-  --color-selected: var(--blue-100);
-  --color-selected-dark: var(--blue-300);
-  --color-highlight: var(--yellow-200);
+  /* Custom Green Palette */
+  --green-50:  #f3fdf1;
+  --green-100: #d9ead3;
+  --green-200: #b3d8a8;  /* your main theme color */
+  --green-300: #a0c997;
+  --green-400: #8cb18c;
+  --green-500: #6a926a;
+  --green-600: #4f7942;
+  --green-700: #3d6131;
+  --green-800: #2f4a26;
+  --green-900: #1c2d1a;
 
-  /* Accent colors */
-  --color-primary: var(--zinc-900);
-  --color-secondary: var(--zinc-100);
-  --color-negative: var(--red-600);
+  /* General Background & Text */
+  --color-bg: var(--green-200);
+  --color-text: #1b1b1b;
+  --color-text-reversed: white;
+  --color-text-subtle: var(--green-700);
+  --color-link: var(--green-700);
+  --color-border-light: var(--green-100);
+  --color-border: var(--green-400);
+  --color-border-dark: var(--green-500);
+  --color-selected: var(--green-100);
+  --color-selected-dark: var(--green-300);
+  --color-highlight: var(--green-50);
+
+  /* Accent Colors */
+  --color-primary: var(--green-600);
+  --color-secondary: var(--green-100);
+  --color-negative: #dc2626; /* red */
   --color-positive: var(--green-600);
 
-  /* SVG color values */
+  /* SVG Filter Colors */
   --color-filter-text: invert(0);
   --color-filter-text-reversed: invert(1);
   --color-filter-negative: invert(22%) sepia(85%) saturate(1790%) hue-rotate(339deg) brightness(105%) contrast(108%);
   --color-filter-positive: invert(44%) sepia(89%) saturate(409%) hue-rotate(89deg) brightness(94%) contrast(97%);
+}
 
-  @media (prefers-color-scheme: dark) {
-    /* Abstractions */
-    --color-bg: var(--zinc-950);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--green-800);
     --color-text: white;
     --color-text-reversed: black;
-    --color-text-subtle: var(--zinc-400);
-    --color-link: var(--blue-400);
-    --color-border-light: var(--zinc-900);
-    --color-border: var(--zinc-800);
-    --color-border-dark: var(--zinc-600);
-    --color-selected: var(--blue-950);
-    --color-selected-dark: var(--blue-800);
-    --color-highlight: var(--yellow-900);
+    --color-text-subtle: var(--green-300);
+    --color-link: var(--green-200);
+    --color-border-light: var(--green-700);
+    --color-border: var(--green-600);
+    --color-border-dark: var(--green-500);
+    --color-selected: var(--green-700);
+    --color-selected-dark: var(--green-600);
+    --color-highlight: var(--green-500);
 
-    /* Accent colors */
-    --color-primary: var(--zinc-50);
-    --color-secondary: var(--zinc-800);
-    --color-negative: var(--red-900);
-    --color-positive: var(--green-900);
+    --color-primary: var(--green-300);
+    --color-secondary: var(--green-800);
+    --color-negative: #7f1d1d; /* dark red */
+    --color-positive: var(--green-400);
 
-    /* SVG color values */
     --color-filter-text: invert(1);
     --color-filter-text-reversed: invert(0);
     --color-filter-negative: invert(15%) sepia(65%) saturate(2067%) hue-rotate(339deg) brightness(102%) contrast(97%);

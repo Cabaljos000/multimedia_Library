@@ -1,15 +1,34 @@
-<% if @book.cover_image.attached? %>
-  <%= image_tag @book.cover_image.variant(resize_to_limit: [300, 450]), class: "rounded mb-4 shadow-md" %>
-<% end %>
+<div class="max-w-xl mx-auto p-6 bg-white shadow rounded-lg">
+  <div class="flex flex-col md:flex-row gap-6 mb-6">
+    <div class="w-48 h-72 rounded-lg overflow-hidden shadow-md">
+      <% if @book.poster.attached? %>
+        <%= image_tag @book.poster.variant(resize_to_fill: [200, 300]), alt: @book.title, class: "w-full h-full object-cover" %>
+      <% else %>
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+          No Image
+        </div>
+      <% end %>
+    </div>
 
-<h1 class="text-2xl font-bold mb-2"><%= @book.title %></h1>
-<p class="mb-1"><%= @book.description %></p>
-<p class="mb-1">Publication Year: <%= @book.publication_year %></p>
-<p class="mb-1">Rating: <%= @book.rating %></p>
-<p class="mb-1">Author: <%= @book.author %></p>
+    <div class="flex flex-col justify-between">
+      <h1 class="text-3xl font-bold mb-2"><%= @book.title %></h1>
+      <p class="text-gray-700"><strong>Author:</strong> <%= @book.author %></p>
+      <p class="text-gray-700"><strong>Release Date:</strong> <%= @book.year %></p>
+      <p class="text-gray-700"><strong>Rating:</strong> <%= @book.rating %></p>
+      <p class="text-gray-700"><strong>Genre:</strong> <%= @book.genre %></p>
+      <p class="text-gray-700"><strong>Franchise:</strong> <%= @book.franchise %></p>
+    </div>
+  </div>
 
-<div class="flex flex-wrap items-center gap mbs-6" style="--row-gap: .5rem">
-  <%= link_to "Edit this book", edit_book_path(@book), class: "btn" %>
-  <%= link_to "Back to books", books_path, class: "btn" %>
-  <%= button_to "Destroy this book", @book, method: :delete, class: "btn" %>
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Summary</h2>
+    <p class="text-gray-700"><%= @book.summary %></p>
+  </div>
+
+  <div class="flex flex-wrap gap-4">
+    <%= link_to "Edit", edit_book_path(@book), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>
+    <%= link_to "Back to Books", books_path, class: "px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition" %>
+    <%= button_to "Delete", @book, method: :delete, data: { confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition" %>
+  </div>
 </div>
+
