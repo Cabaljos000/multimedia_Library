@@ -10,22 +10,22 @@
  */
 
  .movie-image, .book-image, .music-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
 
+/* Dropdown menu */
 .dropdown-menu {
   display: none;
   position: absolute;
   right: 0;
   margin-top: 0.5rem;
   width: 12rem;
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: var(--green-100); /* soft background */
+  border: 1px solid var(--green-400);
   border-radius: 6px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -42,25 +42,26 @@
   width: 100%;
   padding: 0.5rem 1rem;
   text-decoration: none;
-  color: #333;
+  color: var(--green-900);
   transition: background 0.2s;
 }
 
 .dropdown-menu li .dropdown-item:hover {
-  background-color: #f0f0f0;
+  background-color: var(--green-200);
 }
 
-
+/* Buttons */
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: none;
   font-weight: 500;
   cursor: pointer;
-  background-color: #2563eb;
+  background-color: var(--green-600);
   color: white;
+  transition: background 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #1d4ed8;
+  background-color: var(--green-700);
 }

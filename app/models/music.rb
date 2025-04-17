@@ -6,6 +6,7 @@ class Music < ApplicationRecord
     validates :genre, presence: true
     validates :year, presence: true
     validate :description_word_limit
+    has_one_attached :poster
 
     def description_word_limit
         if description.present? && description.split.size > 100
