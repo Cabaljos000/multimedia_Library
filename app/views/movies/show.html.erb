@@ -4,8 +4,8 @@
       <% if @movie.poster.attached? %>
         <%= image_tag @movie.poster.variant(resize_to_fill: [200, 300]), alt: @movie.title, class: "w-full h-full object-cover" %>
       <% else %>
-        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-          No Image
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+          <span class="text-sm text-gray-500 text-center">No Image</span>
         </div>
       <% end %>
     </div>

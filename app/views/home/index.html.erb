@@ -3,9 +3,10 @@
 <% [["Movies", @movies, new_movie_path, :movie_path], ["Books", @books, new_book_path, :book_path], ["Music", @musics, new_music_path, :music_path]].each do |label, collection, new_path, item_path| %>
   <div class="flex items-center justify-between mt-12 mb-4">
     <h2 class="text-2xl font-bold"><%= label %></h2>
-    <%= link_to "New #{label.singularize}", new_path, class: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" %>
+    <%= link_to "New #{label.singularize}", new_path, class: "px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" %>
   </div>
 
+  <!-- Scrollable container like in 'main' -->
   <div class="overflow-x-auto pb-4">
     <div class="flex items-start gap-6 w-max">
       <% collection.each do |item| %>
@@ -29,4 +30,3 @@
     </div>
   </div>
 <% end %>
-
