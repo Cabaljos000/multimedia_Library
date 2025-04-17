@@ -1,24 +1,25 @@
-<% content_for :title, "Editing movie" %>
+<% content_for :title, "Editing Movie" %>
 
-<h1 class="font-bold text-4xl mbe-4">Editing movie</h1>
+<div class="max-w-2xl mx-auto p-8 bg-[#1a1a1a] text-white shadow-lg rounded-lg mt-8">
+  <h1 class="text-3xl font-bold mb-6 text-center border-b border-gray-700 pb-2">Edit Movie</h1>
 
-<%= render "form", movie: @movie %>
+  <%= render "form", movie: @movie %>
 
-<div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
-  <%= link_to "Show this movie", @movie, class: "btn" %>
-  <%= link_to "Back to movies", movies_path, class: "btn" %>
-  <%= link_to "Edit", edit_movie_path(@movie), class: "btn" %>
-</div>
-
-<%= form_with(model: @movie, local: true) do |form| %>
   <% if @movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-      <ul>
+    <div class="mt-6 p-4 bg-red-900 text-red-200 border border-red-600 rounded">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:
+      </h2>
+      <ul class="list-disc list-inside text-sm ml-4">
         <% @movie.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-<% end %>
+
+  <div class="flex flex-wrap justify-center gap-4 mt-6">
+    <%= link_to "Show this Movie", @movie, class: "btn" %>
+    <%= link_to "Back to Movies", movies_path, class: "btn btn--secondary" %>
+  </div>
+</div>

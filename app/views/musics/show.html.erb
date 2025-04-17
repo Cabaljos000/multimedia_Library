@@ -1,10 +1,10 @@
-<div class="max-w-xl mx-auto p-6 bg-white shadow rounded-lg">
+<div class="max-w-3xl mx-auto p-6 bg-[#1a1a1a] text-white shadow-lg rounded-lg mt-8">
   <div class="flex flex-col md:flex-row gap-6 mb-6">
-    <div class="w-48 h-72 rounded-lg overflow-hidden shadow-md">
+    <div class="w-48 h-72 rounded-lg overflow-hidden shadow-md bg-gray-800">
       <% if @music.poster.attached? %>
         <%= image_tag @music.poster.variant(resize_to_fill: [200, 300]), alt: @music.title, class: "w-full h-full object-cover" %>
       <% else %>
-        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+        <div class="w-full h-full flex items-center justify-center text-sm text-gray-400">
           No Image
         </div>
       <% end %>
@@ -12,22 +12,24 @@
 
     <div class="flex flex-col justify-between">
       <h1 class="text-3xl font-bold mb-2"><%= @music.title %></h1>
-      <p class="text-gray-700"><strong>Artist:</strong> <%= @music.artist %></p>
-      <p class="text-gray-700"><strong>Album:</strong> <%= @music.album %></p>
-      <p class="text-gray-700"><strong>Genre:</strong> <%= @music.genre %></p>
-      <p class="text-gray-700"><strong>Release Year:</strong> <%= @music.year %></p>
-      <p class="text-gray-700"><strong>Rating:</strong> <%= @music.rating %></p>
+      <p class="text-gray-300"><strong>Artist:</strong> <%= @music.artist %></p>
+      <p class="text-gray-300"><strong>Album:</strong> <%= @music.album %></p>
+      <p class="text-gray-300"><strong>Genre:</strong> <%= @music.genre %></p>
+      <p class="text-gray-300"><strong>Release Year:</strong> <%= @music.year %></p>
+      <p class="text-gray-300"><strong>Rating:</strong> <%= @music.rating %>/5</p>
     </div>
   </div>
 
-  <div class="mb-6">
-    <h2 class="text-xl font-semibold mb-2">Description</h2>
-    <p class="text-gray-700"><%= @music.description %></p>
-  </div>
+  <% if @music.description.present? %>
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2 border-b border-gray-700 pb-1">Description</h2>
+      <p class="text-gray-300 leading-relaxed"><%= @music.description %></p>
+    </div>
+  <% end %>
 
   <div class="flex flex-wrap gap-4">
-    <%= link_to "Edit", edit_music_path(@music), class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition" %>
-    <%= link_to "Back to Musics", musics_path, class: "px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition" %>
-    <%= button_to "Delete", @music, method: :delete, data: { confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition" %>
+    <%= link_to "Edit", edit_music_path(@music), class: "btn" %>
+    <%= link_to "Back to Music", musics_path, class: "btn btn--secondary" %>
+    <%= button_to "Delete", @music, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn--danger" %>
   </div>
 </div>

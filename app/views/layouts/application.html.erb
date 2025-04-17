@@ -18,7 +18,8 @@
     <%= stylesheet_link_tag "css-zero/variables", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "css-zero/utilities", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "input", "data-turbo-track": "reload" %>
+  
+    <%= javascript_include_tag "application", defer: true %>
   </head>
 
   <body class="bg-gray-100 text-grey-900 font-sans">
@@ -30,6 +31,22 @@
       <span>Welcome, <%= current_user.email %></span>
       <%= link_to "Profile", edit_user_registration_path %>
       <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+
+      <div class="relative ml-4">
+      <button id="userDropdownBtn" class="px-3 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition">
+        ☰ Menu
+      </button>
+
+      <div id="userDropdownMenu" class="dropdown-menu absolute right-0 mt-2 w-48 bg-[#1a1a1a] text-white rounded-md shadow-lg z-50 hidden">
+        <ul class="py-2 space-y-1">
+          <li><%= link_to "Home", root_path, class: "dropdown-item" %></li>
+          <li><%= link_to "My Movies", movies_path, class: "dropdown-item" %></li>
+          <li><%= link_to "My Books", books_path, class: "dropdown-item" %></li>
+          <li><%= link_to "My Music", musics_path, class: "dropdown-item" %></li>
+        </ul>
+      </div>
+    </div>
+
     <% else %>
       <%= link_to "Login", new_user_session_path %>
       <%= link_to "Sign Up", new_user_registration_path %>
@@ -60,20 +77,29 @@
     </main>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const btn = document.getElementById("userDropdownBtn");
-        const menu = document.getElementById("userDropdownMenu");
-
-        btn.addEventListener("click", () => {
-          menu.style.display = menu.style.display === "block" ? "none" : "block";
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("userDropdownBtn");
+      const menu = document.getElementById("userDropdownMenu");
+  
+      if (btn && menu) {
+  
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          menu.classList.toggle("show");
         });
-
+  
         document.addEventListener("click", function (e) {
           if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.style.display = "none";
+            menu.classList.remove("show");
           }
         });
-      });
-    </script>
+      } else {
+        console.warn("Dropdown elements not found in DOM");
+      }
+    });
+  </script>
+  
+  
+  
   </body>
 </html>

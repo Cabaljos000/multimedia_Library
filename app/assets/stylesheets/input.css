@@ -1,3 +1,7 @@
+.hidden {
+  display: none !important;
+}
+
 .input {
   appearance: none;
   background-color: #777;
@@ -173,4 +177,35 @@
 .site-header .nav-links span {
   color: #ccc;
   font-size: 0.9rem;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%; /* aligns it just below the button */
+  margin-top: 0.5rem;
+  width: 12rem;
+
+  background-color: #1a1a1a; /* Dark background */
+  color: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 0.25rem 0;
+  width: 12rem;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ccc;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #2a2a2a;
+  color: white;
 }

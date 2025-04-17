@@ -1,30 +1,36 @@
 <% content_for :title, "Books" %>
 
-<div class="flex items-center justify-between mb-6">
-  <h1 class="font-bold text-4xl">Books</h1>
-  <%= link_to "New book", new_book_path, class: "btn btn--primary" %>
-</div>
+<div class="max-w-6xl mx-auto text-white px-4 py-8">
+  <div class="flex items-center justify-between mb-6 border-b border-gray-700 pb-2">
+    <h1 class="text-3xl font-bold">Books</h1>
+    <%= link_to "New Book", new_book_path, class: "btn" %>
+  </div>
 
-<div id="books" class="overflow-x-auto pb-4">
-  <div class="flex items-start gap-6 w-max">
-    <% @books.each do |book| %>
-      <div class="flex flex-col items-center w-48">
-        <%= link_to book_path(book), class: "group w-full" do %>
-          <div class="w-full h-72 rounded-lg overflow-hidden shadow-md transform transition-transform duration-200 group-hover:scale-105">
-            <% if book.poster.attached? %>
-              <%= image_tag book.poster.variant(resize_to_fill: [200, 300]), alt: book.title, class: "w-full h-full object-cover" %>
-            <% else %>
-              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span class="text-sm text-gray-500 text-center">No Image</span>
+  <% if @books.any? %>
+    <div id="books" class="overflow-x-auto pb-4">
+      <div class="flex items-start gap-6 w-max">
+        <% @books.each do |book| %>
+          <div class="flex flex-col items-center w-48">
+            <%= link_to book_path(book), class: "group w-full" do %>
+              <div class="w-full h-72 rounded-lg overflow-hidden bg-[#1a1a1a] shadow-md transform transition-transform duration-200 group-hover:scale-105">
+                <% if book.poster.attached? %>
+                  <%= image_tag book.poster.variant(resize_to_fill: [200, 300]), alt: book.title, class: "w-full h-full object-cover" %>
+                <% else %>
+                  <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                    <span class="text-sm text-gray-400 text-center">No Image</span>
+                  </div>
+                <% end %>
+              </div>
+              <!-- Optional: Remove this if you’re already displaying the title in a partial -->
+              <div class="mt-2 text-center text-sm font-medium text-gray-300 truncate w-full">
+                <%= book.title %>
               </div>
             <% end %>
           </div>
-          <div class="mt-2 text-center text-sm font-semibold text-gray-800 truncate w-full">
-            <%= book.title %>
-          </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <p class="text-gray-400 italic mt-4">No books found.</p>
+  <% end %>
 </div>
-
