@@ -1,64 +1,48 @@
-<%= form_with(model: movie, local: true, html: { multipart: true }) do |form| %>
-  <% if movie.errors.any? %>
-    <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
-      <h2 class="font-medium leading-none"><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+<div class="max-w-xl mx-auto p-8 bg-[#1a1a1a] text-white rounded-lg shadow">
+  <%= form_with(model: movie, local: true, html: { multipart: true }) do |form| %>
 
-      <ul class="text-sm mis-3" style="list-style: disc">
-        <% movie.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="flex justify-center mb-4">
-    <% if movie.poster.attached? %>
-      <%= image_tag movie.poster, alt: "#{movie.title} cover", class: "w-40 h-auto rounded-lg shadow-md" %>
+    <% if movie.errors.any? %>
+      <div class="mb-6 p-4 bg-red-900 border-l-4 border-red-500 rounded">
+        <h2 class="font-semibold mb-2 text-red-300"><%= pluralize(movie.errors.count, "error") %> prevented saving:</h2>
+        <ul class="ml-5 list-disc text-red-200 text-sm">
+          <% movie.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </div>
 
-  <!-- Title -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :title, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :title, class: "input" %>
-  </div>
+    <% if movie.poster.attached? %>
+      <div class="flex justify-center mb-6">
+        <%= image_tag movie.poster, alt: "#{movie.title} Poster", class: "w-40 h-auto rounded shadow" %>
+      </div>
+    <% end %>
 
-  <!-- Director -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :director, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :director, class: "input" %>
-  </div>
+    <%# Form fields stacked vertically %>
+    <div class="space-y-4">
+      <% [
+        [:title, :text_field],
+        [:director, :text_field],
+        [:year, :number_field],
+        [:rating, :number_field, { in: 0..5 }],
+        [:franchise, :text_field],
+        [:description, :text_area]
+      ].each do |field, method, opts = {}| %>
+        <div class="flex flex-col">
+          <%= form.label field, class: "text-sm font-medium text-gray-200 mb-1" %>
+          <%= form.send(method, field, { class: "input w-full" }.merge(opts)) %>
+        </div>
+      <% end %>
 
-  <!-- Year -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :year, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :year, class: "input" %>
-  </div>
+      <div class="flex flex-col">
+        <%= form.label :poster, "Upload Movie Poster", class: "text-sm font-medium text-gray-200 mb-1" %>
+        <%= form.file_field :poster, class: "input w-full" %>
+      </div>
+    </div>
 
-  <!-- Rating -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :rating, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :rating, in: 0..5, class: "input" %>
-  </div>
+    <div class="text-center mt-6">
+      <%= form.submit "Done", class: "btn" %>
+    </div>
 
-  <!-- Franchise -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :franchise, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :franchise, class: "input" %>
-  </div>
-
-  <!-- Description -->
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :description, class: "text-sm font-medium leading-none" %>
-    <%= form.text_area :description, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :poster, "Upload Movie Poster", class: "text-sm font-medium leading-none" %>
-    <%= form.file_field :poster, class: "input" %>
-  </div>
-
-  <div class="inline-flex items-center mbs-2 mie-1">
-    <%= form.submit "Done", class: "btn btn--primary" %>
-  </div>
-<% end %>
+  <% end %>
+</div>

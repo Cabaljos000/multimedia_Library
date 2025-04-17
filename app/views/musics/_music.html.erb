@@ -1,52 +1,53 @@
-<div id="<%= dom_id(music) %>" class="flex flex-col gap">
+<div id="<%= dom_id(music) %>" class="bg-[#1a1a1a] text-white rounded-lg shadow-md p-6 flex flex-col gap-4 max-w-md mx-auto">
 
   <% if music.image_url.present? %>
-    <div class="flex justify-center">
-      <%= image_tag music.image_url, class: "music-image", style: "width: 150px; height: 150px;" %>
+    <div class="flex justify-center mb-4">
+      <%= image_tag music.image_url, class: "rounded-md shadow w-40 h-40 object-cover" %>
     </div>
   <% end %>
 
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Title:</h4>
-    <p class="leading-none"><%= music.title %></p>
-  </div>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Artist:</h4>
-    <p class="leading-none"><%= music.artist %></p>
-  </div>
-  <% if music.album.present? %>
-    <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Album:</h4>
-    <p class="leading-none"><%= music.album %></p>
+  <div class="space-y-2 text-sm">
+    <div>
+      <h4 class="font-semibold text-gray-300">Title</h4>
+      <p><%= music.title %></p>
     </div>
-  <% end %>
-  <% if music.description.present? %>
-    <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Description:</h4>
-    <p class="leading-none"><%= music.description %></p>
-    </div>
-  <% end %>
-  <% if music.genre.present? %>
-    <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Genre:</h4>
-    <p class="leading-none"><%= music.genre %></p>
-    </div>
-  <% end %>
-  <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Year:</h4>
-    <p class="leading-none"><%= music.year %></p>
-  </div>
-  <% if music.description.present? %>
-    <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Description:</h4>
-    <p class="leading-none"><%= music.description %></p>
-    </div>
-  <% end %>
-  <% if music.rating.present? %>
-    <div class="flex flex-col gap-half">
-    <h4 class="font-medium leading-none">Rating:</h4>
-    <p class="leading-none"><%= music.rating %></p>
-    </div>
-  <% end %>
 
+    <div>
+      <h4 class="font-semibold text-gray-300">Artist</h4>
+      <p><%= music.artist %></p>
+    </div>
+
+    <% if music.album.present? %>
+      <div>
+        <h4 class="font-semibold text-gray-300">Album</h4>
+        <p><%= music.album %></p>
+      </div>
+    <% end %>
+
+    <% if music.genre.present? %>
+      <div>
+        <h4 class="font-semibold text-gray-300">Genre</h4>
+        <p><%= music.genre %></p>
+      </div>
+    <% end %>
+
+    <div>
+      <h4 class="font-semibold text-gray-300">Year</h4>
+      <p><%= music.year %></p>
+    </div>
+
+    <% if music.rating.present? %>
+      <div>
+        <h4 class="font-semibold text-gray-300">Rating</h4>
+        <p><%= music.rating %></p>
+      </div>
+    <% end %>
+
+    <% if music.description.present? %>
+      <div>
+        <h4 class="font-semibold text-gray-300">Description</h4>
+        <p class="text-sm text-gray-300"><%= music.description %></p>
+      </div>
+    <% end %>
+  </div>
 </div>

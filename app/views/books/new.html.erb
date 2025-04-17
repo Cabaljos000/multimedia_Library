@@ -1,6 +1,11 @@
 <% content_for :title, "New Book" %>
 
-<h1 class="font-bold text-4xl mbe-4">New Book</h1>
+<div class="max-w-2xl mx-auto p-8 bg-[#1a1a1a] text-white shadow-lg rounded-lg mt-8">
+  <h1 class="text-3xl font-bold mb-6 text-center border-b border-gray-700 pb-2">New Book</h1>
 
-<%= render "form", book: @book %>
+  <%= render "form", book: @book %>
 
+  <div class="mt-6 text-center">
+    <%= link_to "Back to Books", books_path, class: "btn btn--secondary" %>
+  </div>
+</div>

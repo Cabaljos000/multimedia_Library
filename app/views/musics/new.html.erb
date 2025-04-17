@@ -1,16 +1,21 @@
 <% content_for :title, "New Song" %>
 
-<h1 class="font-bold text-4xl mbe-4">New Music</h1>
+<div class="max-w-2xl mx-auto p-8 bg-[#1a1a1a] text-white shadow-lg rounded-lg mt-8">
+  <h1 class="text-3xl font-bold mb-6 text-center border-b border-gray-700 pb-2">Add a New Song</h1>
 
-<div id="spotify-search-container" class="mb-4 hidden">
-  <input type="text" id="spotify-query" placeholder="Enter song name" class="border px-2 py-1 rounded w-1/2">
-  <button id="spotify-search-btn" class="btn ml-2">Search</button>
-</div>
+  <div id="spotify-search-container" class="mb-6 hidden">
+    <label for="spotify-query" class="block text-sm font-medium text-gray-200 mb-1">Search on Spotify</label>
+    <div class="flex items-center gap-2">
+      <input type="text" id="spotify-query" placeholder="Enter song name" class="input w-full">
+      <button id="spotify-search-btn" class="btn">Search</button>
+    </div>
+  </div>
 
-<%= render "form", model: @music %>
+  <%= render "form", model: @music %>
 
-<div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
-  <%= link_to "Back to music", musics_path, class: "btn" %>
+  <div class="text-center mt-6">
+    <%= link_to "Back to Music", musics_path, class: "btn btn--secondary" %>
+  </div>
 </div>
 
 <script>
@@ -43,16 +48,16 @@
             return;
           }
 
-          // Fill in the form fields
           document.getElementById("music_title").value = data.title || "";
           document.getElementById("music_artist").value = data.artist || "";
           document.getElementById("music_album").value = data.album || "";
           document.getElementById("music_genre").value = data.genre || "";
           document.getElementById("music_year").value = data.year;
           document.getElementById("music_image_url").value = data.image_url || "";
+
           const imageContainer = document.getElementById("spotify-image-container");
           const imageUrl = data.image_url;
-          imageContainer.innerHTML = `<img src="${imageUrl}" alt="Album artwork" style="width: 150px; height: 150px;">`;
+          imageContainer.innerHTML = `<img src="${imageUrl}" alt="Album artwork" class="rounded shadow w-36 h-36">`;
         })
         .catch(err => {
           console.error(err);

@@ -1,60 +1,48 @@
-<%= form_with(model: @music, local: true, html: { multipart: true }) do |form| %>
-  <% if @music.errors.any? %>
-    <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
-      <h2 class="font-medium leading-none"><%= pluralize(@music.errors.count, "error") %> prohibited this song from being saved:</h2>
+<div class="form-card max-w-xl mx-auto bg-[#1a1a1a] text-white p-8 rounded-lg shadow-md">
 
-      <ul class="text-sm mis-3" style="list-style: disc">
-        <% @music.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: @music, local: true, html: { multipart: true }) do |form| %>
+    <% if @music.errors.any? %>
+      <div class="alert alert--negative flex flex-col gap-2 mb-6 p-4 bg-red-900 border-l-4 border-red-500 rounded">
+        <h2 class="font-medium leading-none text-red-300">
+          <%= pluralize(@music.errors.count, "error") %> prohibited this song from being saved:
+        </h2>
+        <ul class="text-sm ml-4 list-disc text-red-200">
+          <% @music.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# Loop through basic text/number fields %>
+    <% [
+      [:title, :text_field],
+      [:artist, :text_field],
+      [:album, :text_field],
+      [:genre, :text_field],
+      [:year, :number_field],
+      [:rating, :number_field],
+      [:description, :text_area]
+    ].each do |field, type| %>
+      <div class="flex flex-col items-start gap-2 mb-4">
+        <%= form.label field, class: "text-sm font-medium text-gray-200" %>
+        <%= form.send(type, field, class: "input w-full") %>
+      </div>
+    <% end %>
+
+    <div class="flex flex-col items-start gap-2 mb-6">
+      <%= form.label :poster, "Upload Album Cover", class: "text-sm font-medium text-gray-200" %>
+      <%= form.file_field :poster, direct_upload: true, class: "input w-full" %>
+
+      <% if @music.image_url.present? %>
+        <div id="spotify-image-container" class="w-48 h-72 mt-2">
+          <%= image_tag @music.image_url, alt: "Album artwork", class: "rounded shadow w-full h-full object-cover" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-6 text-center">
+      <%= form.submit "Done", class: "btn" %>
     </div>
   <% end %>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :title, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :title, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :artist, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :artist, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :album, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :album, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :genre, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :genre, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :year, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :year, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :rating, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :rating, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :description, class: "text-sm font-medium leading-none" %>
-    <%= form.text_area :description, class: "input" %>
-  </div>
-
-  <div class="flex flex-col items-start gap-half mbe-4">
-    <%= form.label :poster, "Poster", class: "font-semibold text-sm text-gray-700" %>
-    <%= form.file_field :poster, direct_upload: true, class: "mt-1" %>
-    <div id="spotify-image-container" class="w-48 h-72 mt-2">
-    </div>
-  </div>
-
-  <div class="inline-flex items-center mbs-2 mie-1">
-    <%= form.submit "Done", class: "btn btn--primary" %>
-  </div>
-
-<% end %>
+</div>
