@@ -8,8 +8,9 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+@import "input.css";
 
- .movie-image, .book-image, .music-image {
+.movie-image, .book-image, .music-image {
     width: 100%;
     height: 200px;
     object-fit: cover;

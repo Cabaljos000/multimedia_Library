@@ -16,44 +16,24 @@
 
     <%= stylesheet_link_tag "css-zero/reset", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "css-zero/variables", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "css-zero/utilities", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "input", "data-turbo-track": "reload" %>
   </head>
 
   <body class="bg-gray-100 text-grey-900 font-sans">
-    <header class="bg-blue-600 text-white py-4 shadow-md">
-      <div class="container mx-auto flex justify-between items-center px-6">
-      <div>
-        <%= link_to "Go Home", root_path, class: "text-3xl font-bold px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-lg transition" %>
-      </div>
+  <header class="site-header">
+  <%= link_to "Multimedia Library", root_path, class: "logo" %>
 
-      <div class="flex items-center space-x-4">
-        <% if user_signed_in? %>
-          <p class="text-sm">Welcome, <%= current_user.email %>!</p>
-        <% else %>
-          <div class="text-sm">
-            <%= link_to "Login", new_user_session_path, class: "underline" %> |
-            <%= link_to "Sign Up", new_user_registration_path, class: "underline" %>
-          </div>
-        <% end %>
-
-        <div class="relative inline-block text-right">
-          <button id="userDropdownBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md transition">☰ Menu</button>
-          <div id="userDropdownMenu" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50 hidden">
-            <ul class="py-1">
-              <% if user_signed_in? %>
-                <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item block px-4 py-2 hover:bg-gray-200" %></li>
-              <% end %>
-                <li><%= link_to "My Movies", movies_path, class: "dropdown-item block px-4 py-2 hover:bg-gray-2000" %></li>
-                <li><%= link_to "My Books", books_path, class: "dropdown-item block px-4 py-2 hover:bg-gray-2000" %></li>
-                <li><%= link_to "My Music", musics_path, class: "dropdown-item block px-4 py-2 hover:bg-gray-2000" %></li>
-              <% if user_signed_in? %>
-                <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item block px-4 py-2 hover:bg-gray-200", data: { turbo_method: :delete } %></li>
-              <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <div class="nav-links">
+    <% if user_signed_in? %>
+      <span>Welcome, <%= current_user.email %></span>
+      <%= link_to "Profile", edit_user_registration_path %>
+      <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path %>
+      <%= link_to "Sign Up", new_user_registration_path %>
+    <% end %>
   </div>
 </header>
 

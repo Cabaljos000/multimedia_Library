@@ -1,20 +1,24 @@
-<h2>Login</h2>
+<div class="auth-box">
+  <h2>Login</h2> 
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="input-label-group">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+    </div>
+
+    <div class="input-label-group">
+      <%= f.label :password %><br>
+      <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
+    </div>
+
+    <div style="margin-top: 1rem;">
+      <%= f.submit "Log in", class: "btn" %>
+    </div>
+  <% end %>
+
+  <div style="margin-top: 1rem;">
+    <%= link_to "Sign up", new_user_registration_path %> |
+    <%= link_to "Forgot your password?", new_user_password_path %>
   </div>
-
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <div>
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= link_to "Sign up", new_user_registration_path %> |
-<%= link_to "Forgot your password?", new_user_password_path %>
+</div>
