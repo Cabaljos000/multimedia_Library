@@ -15,7 +15,6 @@ When("I press {string}") do |button|
 end
 
 When("I Log-Out") do
-  find("#userDropdownBtn").click  # Opens the dropdown
   click_link "Log Out"
 end
 
