@@ -69,7 +69,7 @@ gem "devise", "~> 4.9"
 
 gem "css-zero", "~> 1.1"
 
-gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-rails", "~> 4.3"
 
 gem "httpparty"
 
